@@ -66,4 +66,4 @@ Route::get('/siswa/cetakpdf',\App\Http\Controllers\SiswaController::class . '@ce
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
