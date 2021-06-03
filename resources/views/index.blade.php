@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="icon" href="logosdm18.ico" type="image/ico" />
 
-    <title> | </title>
+    <title>Gentelella Alela! | </title>
 
     <!-- Bootstrap -->
     <link href="tmp1/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+              <a href="index" class="site_title"><img src="logosdm18.png" style="width:41px; height:50px"> <span> Rapor SDM 18 Sby</span></a>
             </div>
 
             <div class="clearfix"></div>
