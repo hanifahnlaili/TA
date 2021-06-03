@@ -36,7 +36,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index" class="site_title"><img src="logosdm18.png" style="width:41px; height:50px"> <span> Rapor SDM 18 Sby</span></a>
+              <a href="index" class="site_title"><img src="logosdm18.png" style="width:41px; height:50px"> <span style="font-size:large"> Rapor SDM 18 Sby</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -58,36 +58,66 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                <h3>Rapor Online Dinas</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="index.html">Dashboard</a></li>
-                      <li><a href="index2.html">Dashboard2</a></li>
-                      <li><a href="index3.html">Dashboard3</a></li>
-                    </ul>
+                  <li><a target="_blank" href="https://rapor.dispendik.surabaya.go.id/"><i class="fa fa-university"></i> Rapor Online Dinas Pendidikan Kota Surabaya</a>
                   </li>
                 </ul>
               </div>
               <div class="menu_section">
-                <h3>Live On</h3>
+                <h3>Rapor Internal SDM 18 sby</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-sitemap"></i> Kelas 3 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="#level1_1">Level One</a>
-                        <li><a>Level One<span class="fa fa-chevron-down"></span></a>
+                        <li><a href="#level1_2">Ketuntasan Belajar Mengajar (KBM)</a>
+                        </li>
+                        <li><a href="#level1_2">Kompetensi Dasar (KD)</a>
+                        </li>
+                        <li><a href="#level1_1">Daftar Siswa</a>
+                        </li>
+                        <li><a href="#level1_2">Presensi</a>
+                        </li>
+                        <li><a href="#level1_2">Rekap Buku Penghubung</a>
+                        </li>
+                        <li><a>Nilai Mata Pelajaran<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Level Two</a>
+                            <li class="sub_menu"><a href="level2.html">Al-Qur'an Hadist</a>
                             </li>
-                            <li><a href="#level2_1">Level Two</a>
+                            <li><a href="#level2_1">Aqidah Akhlaq</a>
                             </li>
-                            <li><a href="#level2_2">Level Two</a>
+                            <li><a href="#level2_2">Tarikh Islam</a>
+                            </li>
+                            <li><a href="#level2_2">Fiqih Ibadah</a>
+                            </li>
+                            <li><a href="#level2_2">Kemuhammadiyahan</a>
+                            </li>
+                            <li><a href="#level2_2">Pendidikan Pancasila dan Kewarganegaraan</a>
+                            </li>
+                            <li><a href="#level2_2">Bahasa Indonesia</a>
+                            </li>
+                            <li><a href="#level2_2">Matematika</a>
+                            </li>
+                            <li><a href="#level2_2">Ilmu Pengetahuan Alam</a>
+                            </li>
+                            <li><a href="#level2_2">Ilmu Pengetahuan Sosial</a>
+                            </li>
+                            <li><a href="#level2_2">Seni Budaya dan Prakarya</a>
+                            </li>
+                            <li><a href="#level2_2">Pendidikan Jasmani, Olahraga, dan Kesehatan</a>
+                            </li>
+                            <li><a href="#level2_2">Bahasa Jawa</a>
+                            </li>
+                            <li><a href="#level2_2">Bahasa Arab</a>
+                            </li>
+                            <li><a href="#level2_2">Bahasa Inggris</a>
+                            </li>
+                            <li><a href="#level2_2">Teknologi Informasi dan Komunikasi</a>
                             </li>
                           </ul>
                         </li>
-                        <li><a href="#level1_2">Level One</a>
-                        </li>
                     </ul>
+                  </li>
+                  <li><a><i class="fa fa-user"></i> Daftar User</a>
                   </li>                  
                 </ul>
               </div>
@@ -106,7 +136,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="login">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -133,7 +163,10 @@
                         <span>Settings</span>
                       </a>
                   <a class="dropdown-item"  href="javascript:;">Help</a>
-                    <a class="dropdown-item"  href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <a class="dropdown-item" ><i class="fa fa-sign-out pull-right"></i> Log Out</a>
+                  </form>
                   </div>
                 </li>
 
