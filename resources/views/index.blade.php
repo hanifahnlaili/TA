@@ -69,7 +69,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-sitemap"></i> Kelas 3 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a href="#level1_2">Ketuntasan Belajar Mengajar (KBM)</a>
+                        <li><a href="menu_kbmkls3">Ketuntasan Belajar Mengajar (KBM)</a>
                         </li>
                         <li><a href="#level1_2">Kompetensi Dasar (KD)</a>
                         </li>
