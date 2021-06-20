@@ -14,14 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-// Route::get('/login',\App\Http\Controllers\AuthController::class . '@login');
-// Route::post('/postlogin',\App\Http\Controllers\AuthController::class . '@postlogin');
-
 Route::get('/home',\App\Http\Controllers\HomeController::class . '@index');
 
-// Route::prefix('admin')->middleware(['auth','cekAdmin'])->group(function(){
+Route::prefix('admin')->middleware(['auth','cekAdmin'])->group(function(){
+    
     Route::get('/index',\App\Http\Controllers\IndexController::class . '@index');
-
+    
     //user
     Route::get('/menu_userpengguna',\App\Http\Controllers\UserController::class . '@index');
     Route::get('/user/create',\App\Http\Controllers\UserController::class . '@create');
@@ -64,6 +62,6 @@ Route::get('/home',\App\Http\Controllers\HomeController::class . '@index');
     Route::post('/siswa/update',\App\Http\Controllers\SiswaController::class . '@update');
     Route::get('/siswa/cetakpdf',\App\Http\Controllers\SiswaController::class . '@cetakpdf');
 
-// });
+});
 
 
