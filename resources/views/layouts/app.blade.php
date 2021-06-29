@@ -6,8 +6,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{asset('logosdm18.ico')}}" type="image/ico" />
 
-    <title>Gentelella Alela! | </title>
+    <title>Rapor SD Muhammadiyah 18 Surabaya</title>
 
     <!-- Bootstrap -->
     <link href="tmp1/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -43,19 +44,15 @@
                 <button type="submit" class="btn btn-default">Log in</button>
               </div>
 
-              <div class="clearfix"></div>
-
               <div class="separator">
-
-                <div class="clearfix"></div>
-                <br />
-
-                <div>
-                  <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                  <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                </div>
+                
               </div>
             </form>
+              <div>
+                <img src="{{asset('logo.png')}}" width="100%" href="https://www.sdm18sby.com"><br><br>
+                <a href="https://www.sdm18sby.com"> Sekolah "Plus" SD Muhammadiyah 18 Surabaya</a><br><br><br><br><br>
+                <p>Copyright © 2021. Rapor Sekolah Dasar Muhammadiyah 18 Surabaya by Hanifah Nurul Laili</p>
+              </div>
           </section>
         </div>
 
