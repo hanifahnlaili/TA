@@ -14,7 +14,7 @@ class CreateKbmTable extends Migration
     public function up()
     {
         Schema::create('kbm', function (Blueprint $table) {
-            $table->string('ID_KBM', 10)->primary();
+            $table->char('ID_KBM', 10)->primary();
             $table->string('ID_MATAPELAJARAN', 10)->index('FK_RELATIONSHIP_16');
             $table->string('NILAI_KBM', 2);
         });

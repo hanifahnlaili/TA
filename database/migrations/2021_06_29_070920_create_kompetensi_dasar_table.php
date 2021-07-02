@@ -14,7 +14,7 @@ class CreateKompetensiDasarTable extends Migration
     public function up()
     {
         Schema::create('kompetensi_dasar', function (Blueprint $table) {
-            $table->string('ID_KD', 10)->primary();
+            $table->char('ID_KD', 10)->primary();
             $table->string('ID_KI', 10)->index('FK_RELATIONSHIP_18');
             $table->string('NAMA_KD', 10);
             $table->text('DETAIL_KD');

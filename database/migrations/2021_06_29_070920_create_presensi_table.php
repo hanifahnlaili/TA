@@ -14,7 +14,7 @@ class CreatePresensiTable extends Migration
     public function up()
     {
         Schema::create('presensi', function (Blueprint $table) {
-            $table->string('ID_PRESENSI', 10)->primary();
+            $table->char('ID_PRESENSI', 10)->primary();
             $table->string('NOMOR_INDUK', 10);
             $table->string('ID_TAHUNPELAJARAN', 10);
             $table->integer('SAKIT')->nullable();

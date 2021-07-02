@@ -14,7 +14,7 @@ class CreatePegawaiTable extends Migration
     public function up()
     {
         Schema::create('pegawai', function (Blueprint $table) {
-            $table->string('NBM_PEGAWAI', 10)->primary();
+            $table->char('NBM_PEGAWAI', 10)->primary();
             $table->string('PEG_NBM_PEGAWAI', 10)->nullable()->index('FK_RELATIONSHIP_27');
             $table->string('NAMA_PEGAWAI', 150);
             $table->string('ALAMAT_PEGAWAI', 200);

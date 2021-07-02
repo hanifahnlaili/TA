@@ -14,7 +14,7 @@ class CreateTahunPelajaranTable extends Migration
     public function up()
     {
         Schema::create('tahun_pelajaran', function (Blueprint $table) {
-            $table->string('ID_TAHUNPELAJARAN', 10)->primary();
+            $table->char('ID_TAHUNPELAJARAN', 10)->primary();
             $table->string('ID_BULAN', 10)->index('FK_RELATIONSHIP_15');
             $table->string('TAHUNPELAJARAN', 10);
             $table->tinyInteger('SEMESTER');

@@ -14,7 +14,7 @@ class CreateKompetensiIntiTable extends Migration
     public function up()
     {
         Schema::create('kompetensi_inti', function (Blueprint $table) {
-            $table->string('ID_KI', 10)->primary();
+            $table->char('ID_KI', 10)->primary();
             $table->string('NAMA_KI', 10);
         });
     }

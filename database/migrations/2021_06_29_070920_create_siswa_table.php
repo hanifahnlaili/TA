@@ -14,7 +14,7 @@ class CreateSiswaTable extends Migration
     public function up()
     {
         Schema::create('siswa', function (Blueprint $table) {
-            $table->string('NOMOR_INDUK', 10)->primary();
+            $table->char('NOMOR_INDUK', 10)->primary();
             $table->char('ID_ORTU', 5)->index('FK_RELATIONSHIP_17');
             $table->char('ID_SEKOLAH', 10)->index('FK_RELATIONSHIP_31');
             $table->string('NAMA_SISWA', 150);

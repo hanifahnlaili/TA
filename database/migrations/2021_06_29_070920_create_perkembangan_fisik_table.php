@@ -14,7 +14,7 @@ class CreatePerkembanganFisikTable extends Migration
     public function up()
     {
         Schema::create('perkembangan_fisik', function (Blueprint $table) {
-            $table->string('ID_PERKEMBANGAN_FISIK', 10)->primary();
+            $table->char('ID_PERKEMBANGAN_FISIK', 10)->primary();
             $table->string('NOMOR_INDUK', 10);
             $table->string('ID_TAHUNPELAJARAN', 10);
             $table->tinyInteger('SEMESTER');

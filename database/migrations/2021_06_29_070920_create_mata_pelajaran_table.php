@@ -14,7 +14,7 @@ class CreateMataPelajaranTable extends Migration
     public function up()
     {
         Schema::create('mata_pelajaran', function (Blueprint $table) {
-            $table->string('ID_MATAPELAJARAN', 10)->primary();
+            $table->char('ID_MATAPELAJARAN', 10)->primary();
             $table->string('NBM_PEGAWAI', 10)->index('FK_RELATIONSHIP_32');
             $table->string('NAMA_MATAPELAJARAN', 50);
         });
