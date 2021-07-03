@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
             'nbm_pegawai' => 'PEG1',
             'tipe_user' => '1',
             'name' => 'Tutus',
-            'email' => 'tutus',
+            'email' => 'tutus@gmail.com',
             'password'=> bcrypt('tutus'),
             'updated_at' => date('Y-m-d h:i:s'),
             'created_at' => date('Y-m-d h:i:s'),

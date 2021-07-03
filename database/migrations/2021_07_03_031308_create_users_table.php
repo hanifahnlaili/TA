@@ -14,14 +14,14 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->char('ID_USER', 10)->primary();
+            $table->char('id_user', 10)->primary();
             $table->char('NBM_PEGAWAI', 10)->index('FK_MEMPUNYAI');
-            $table->char('TIPE_USER', 1);
-            $table->string('NAME', 50);
-            $table->string('EMAIL', 100);
-            $table->string('PASSWORD');
-            $table->timestamp('UPDATED_AT')->useCurrent();
-            $table->timestamp('CREATED_AT')->default('0000-00-00 00:00:00');
+            $table->char('tipe_user', 1);
+            $table->string('name', 50);
+            $table->string('email', 100);
+            $table->string('password');
+            $table->timestamp('updated_at')->useCurrent();
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

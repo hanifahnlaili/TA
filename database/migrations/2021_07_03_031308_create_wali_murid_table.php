@@ -14,7 +14,7 @@ class CreateWaliMuridTable extends Migration
     public function up()
     {
         Schema::create('wali_murid', function (Blueprint $table) {
-            $table->increments('ID_ORTU', 5)->primary();
+            $table->increments('ID_ORTU')->primary();
             $table->string('NAMA_AYAH', 150);
             $table->string('NAMA_IBU', 150);
             $table->string('ALAMAT_ORTU', 200);
