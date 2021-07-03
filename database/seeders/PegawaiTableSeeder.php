@@ -31,7 +31,7 @@ class PegawaiTableSeeder extends Seeder
                 'FOTO_PEGAWAI' => NULL,
             ),
         );
-
+    
         \DB::table('pegawai')->insert(array (
             0 => 
             array (
@@ -69,8 +69,18 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
+            // 3 => 
+            // array (
+            //     'NBM_PEGAWAI' => 'PEG4',
+            //     'PEG_NBM_PEGAWAI' => NULL,
+            //     'NAMA_PEGAWAI' => 'Cahyo Iswahyudi, S.Pd',
+            //     'ALAMAT_PEGAWAI' => 'Jl Rajawali 26',
+            //     'TELP_PEGAWAI' => '08227312438',
+            //     'JABATAN_PEGAWAI' => 'Kepala Sekolah',
+            //     'GENDER_PEGAWAI' => 'L',
+            //     'FOTO_PEGAWAI' => NULL,
+            // ),
         ));
-        
         
     }
 }

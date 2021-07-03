@@ -25,7 +25,7 @@ class WaliMuridTableSeeder extends Seeder
 
         for($i = 0; $i < 35; $i++){
             $ortu[] = [
-                // 'ID_ORTU' => 0,
+                'ID_ORTU' => $faker->numberBetween(1,36),
                 'NAMA_AYAH' => $faker->name('male'),
                 'NAMA_IBU' => $faker->name('female'),
                 'ALAMAT_ORTU' => $faker->address,
@@ -41,6 +41,7 @@ class WaliMuridTableSeeder extends Seeder
         }
 
         \DB::table('wali_murid')->insert($ortu);
+        
         
     }
 }

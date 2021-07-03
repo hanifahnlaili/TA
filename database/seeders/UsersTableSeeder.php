@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
         
         \DB::table('users')->insert([
             'id_user' => 1,
-            'nbm_pegawai' => 'PEG1',
+            'NBM_PEGAWAI' => 'PEG1',
             'tipe_user' => '1',
             'name' => 'Tutus',
             'email' => 'tutus@gmail.com',
