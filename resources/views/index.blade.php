@@ -75,9 +75,23 @@
                         </li>
                         <li><a href="#level1_1">Daftar Siswa</a>
                         </li>
-                        <li><a href="#level1_2">Presensi</a>
-                        </li>
                         <li><a href="#level1_2">Rekap Buku Penghubung</a>
+                        </li>
+                        <li><a>Penilaian Individual Siswa<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li class="sub_menu"><a href="level2.html">Pengembangan Diri</a>
+                            </li>
+                            <li><a href="#level2_1">Catatan Prestasi</a>
+                            </li>
+                            <li><a href="#level2_2">Kondisi Kesehatan</a>
+                            </li>
+                            <li><a href="#level2_1">Kepribadian</a>
+                            </li>
+                            <li><a href="#level2_2">Perkembangan Fisik</a>
+                            </li>
+                            <li><a href="#level2_1">Ketidakhadiran</a>
+                            </li>
+                          </ul>
                         </li>
                         <li><a>Nilai Mata Pelajaran<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
@@ -118,6 +132,8 @@
                     </ul>
                   </li>
                   <li><a><i class="fa fa-user"></i> Daftar User</a>
+                  </li>     
+                  <li><a><i class="fa fa-users"></i> Daftar Siswa</a>
                   </li>                  
                 </ul>
               </div>
@@ -126,7 +142,7 @@
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
-            <div class="sidebar-footer hidden-small">
+            <!-- <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>
@@ -139,7 +155,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="login">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
-            </div>
+            </div> -->
             <!-- /menu footer buttons -->
           </div>
         </div>

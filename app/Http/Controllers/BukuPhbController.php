@@ -27,7 +27,9 @@ class BukuPhbController extends Controller
             ->where('detail_siswa.id_kelas', '=', 'KLS303')
             ->get();
         $avgspiritual = DB::table('bukuphb')->avg('bukuphb.guru_spiritual','bukuphb.ortu_spiritual');
+        $avgspiritual = round($avgspiritual);
         $avgsosial = DB::table('bukuphb')->avg('bukuphb.guru_sosial','bukuphb.ortu_sosial');
+        $avgsosial = round($avgsosial);
         $kelas = DB::table('kelas')->get();
         $tahun_pelajaran = DB::table('tahun_pelajaran')->get();
         $bulan = DB::table('bulan')->get();
