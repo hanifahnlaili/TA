@@ -67,32 +67,11 @@
               <div class="menu_section">
                 <h3>Rapor Internal SDM 18 sby</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-sitemap"></i> Kelas 3 <span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-sitemap"></i> Kelas 3 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="menu_kbmkls3">Ketuntasan Belajar Mengajar (KBM)</a>
                         </li>
-                        <li><a href="#level1_2">Kompetensi Dasar (KD)</a>
-                        </li>
-                        <li><a href="#level1_1">Daftar Siswa</a>
-                        </li>
-                        <li><a href="#level1_2">Rekap Buku Penghubung</a>
-                        </li>
-                        <li><a>Penilaian Individual Siswa<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Pengembangan Diri</a>
-                            </li>
-                            <li><a href="#level2_1">Catatan Prestasi</a>
-                            </li>
-                            <li><a href="#level2_2">Kondisi Kesehatan</a>
-                            </li>
-                            <li><a href="#level2_1">Kepribadian</a>
-                            </li>
-                            <li><a href="#level2_2">Perkembangan Fisik</a>
-                            </li>
-                            <li><a href="#level2_1">Ketidakhadiran</a>
-                            </li>
-                          </ul>
-                        </li>
+                        
                         <li><a>Nilai Mata Pelajaran<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                             <li class="sub_menu"><a href="level2.html">Al-Qur'an Hadist</a>
@@ -130,11 +109,73 @@
                           </ul>
                         </li>
                     </ul>
+                  </li> -->
+                  <!-- <li><a href="#level1_2">Kompetensi Dasar (KD)</a>
                   </li>
-                  <li><a><i class="fa fa-user"></i> Daftar User</a>
+                  <li><a href="#level1_1">Daftar Siswa</a>
+                  </li>
+                  <li><a href="#level1_2">Rekap Buku Penghubung</a>
+                  </li> -->
+                  @if(Auth::user()->tipe_user == 1)
+                  <li><a><i class="fa fa-bars"></i>Penilaian Individu Siswa<span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li class="sub_menu"><a href="level2.html">Pengembangan Diri</a>
+                      </li>
+                      <li><a href="#level2_1">Catatan Prestasi</a>
+                      </li>
+                      <li><a href="#level2_2">Kondisi Kesehatan</a>
+                      </li>
+                      <li><a href="#level2_1">Kepribadian</a>
+                      </li>
+                      <li><a href="#level2_2">Perkembangan Fisik</a>
+                      </li>
+                      <li><a href="#level2_1">Ketidakhadiran</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-user"></i>Daftar User</a>
                   </li>     
-                  <li><a><i class="fa fa-users"></i> Daftar Siswa</a>
-                  </li>                  
+                  <li><a href="{!! url('/menu_bukuphb3sunflo'); !!}"><i class="fa fa-book"></i>Buku Penghubung</a>
+                  </li>    
+                  <li><a href="{!! url('/menu_siswa3sunflo'); !!}"><i class="fa fa-users"></i>Daftar Siswa</a>
+                  </li>
+                  <li><a><i class="fa fa-database"></i>Nilai Mata Pelajaran</a>
+                    <!-- <ul class="nav child_menu">
+                      <li class="sub_menu"><a href="level2.html">Al-Qur'an Hadist</a>
+                      </li>
+                      <li><a href="#level2_1">Aqidah Akhlaq</a>
+                      </li>
+                      <li><a href="#level2_2">Tarikh Islam</a>
+                      </li>
+                      <li><a href="#level2_2">Fiqih Ibadah</a>
+                      </li>
+                      <li><a href="#level2_2">Kemuhammadiyahan</a>
+                      </li>
+                      <li><a href="#level2_2">Pendidikan Pancasila dan Kewarganegaraan</a>
+                      </li>
+                      <li><a href="#level2_2">Bahasa Indonesia</a>
+                      </li>
+                      <li><a href="#level2_2">Matematika</a>
+                      </li>
+                      <li><a href="#level2_2">Ilmu Pengetahuan Alam</a>
+                      </li>
+                      <li><a href="#level2_2">Ilmu Pengetahuan Sosial</a>
+                      </li>
+                      <li><a href="#level2_2">Seni Budaya dan Prakarya</a>
+                      </li>
+                      <li><a href="#level2_2">Pendidikan Jasmani, Olahraga, dan Kesehatan</a>
+                      </li>
+                      <li><a href="#level2_2">Bahasa Jawa</a>
+                      </li>
+                      <li><a href="#level2_2">Bahasa Arab</a>
+                      </li>
+                      <li><a href="#level2_2">Bahasa Inggris</a>
+                      </li>
+                      <li><a href="#level2_2">Teknologi Informasi dan Komunikasi</a>
+                      </li>
+                    </ul> -->
+                  </li>    
+                  @endif        
                 </ul>
               </div>
 
@@ -206,20 +247,13 @@
           </div>
           <!-- /top tiles -->
 
-          <div class="row">
+          <!-- <div class="row">
 
-          </div>
+          </div> -->
           <br />
 
           <div class="row">
-
-
-            <div class="col-md-4 col-sm-4 ">
-            </div>
-
-            <div class="col-md-4 col-sm-4 ">
-            </div>
-
+            @yield('konten')
 
             <div class="col-md-4 col-sm-4 ">
               
@@ -227,30 +261,6 @@
 
           </div>
 
-
-          <div class="row">
-            <div class="col-md-4 col-sm-4 ">
-            </div>
-
-
-            <div class="col-md-8 col-sm-8 ">
-
-
-
-              <div class="row">
-
-              </div>
-              <div class="row">
-
-
-                <!-- Start to do list -->
-                <!-- End to do list -->
-                
-                <!-- start of weather widget -->
-                <!-- end of weather widget -->
-              </div>
-            </div>
-          </div>
         </div>
         <!-- /page content -->
 

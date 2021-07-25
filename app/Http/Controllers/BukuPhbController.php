@@ -10,31 +10,29 @@ use \PDF;
 
 class BukuPhbController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+  
+
     public function phbkls3sunflo()
     {
-        $kelastiga = DB::table('bukuphb')
-            ->select('bukuphb.*', 'siswa.nama_siswa', 'kelas.nama_kelas', 'tahun_pelajaran.tapel', 'tahun_pelajaran.semester', 'bulan.nama_bulan')
-            ->join('detail_siswa', 'bukuphb.nomor_induk', '=', 'detail_siswa.nomor_induk')
-            ->join('siswa', 'siswa.nomor_induk', '=', 'bukuphb.nomor_induk')
-            ->join('kelas', 'kelas.id_kelas', '=', 'detail_siswa.id_kelas')
-            ->join('tahun_pelajaran', 'bukuphb.id_tapel', '=', 'tahun_pelajaran.id_tapel')
-            ->join('bulan', 'tahun_pelajaran.id_bulan', '=', 'bulan.id_bulan')           
-            ->where('detail_siswa.id_kelas', '=', 'KLS303')
-            ->get();
-        $avgspiritual = DB::table('bukuphb')->avg('bukuphb.guru_spiritual','bukuphb.ortu_spiritual');
+        $kelastiga = DB::table('buku_penghubung')->select('buku_penghubung.*')->get();
+        $avgspiritual = DB::table('buku_penghubung')->avg('buku_penghubung.guru_spiritual','buku_penghubung.ortu_spiritual');
         $avgspiritual = round($avgspiritual);
-        $avgsosial = DB::table('bukuphb')->avg('bukuphb.guru_sosial','bukuphb.ortu_sosial');
+        $avgsosial = DB::table('buku_penghubung')->avg('buku_penghubung.guru_sosial','buku_penghubung.ortu_sosial');
         $avgsosial = round($avgsosial);
-        $kelas = DB::table('kelas')->get();
-        $tahun_pelajaran = DB::table('tahun_pelajaran')->get();
-        $bulan = DB::table('bulan')->get();
-        $siswa = DB::table('siswa')->get();
-        return view('menu_bukuphb3sunflo',['bukuphb'=>$kelastiga,'siswa'=>$siswa,'kelas'=>$kelas,'tahun_pelajaran'=>$tahun_pelajaran, 'bulan'=>$bulan,'avgspiritual'=>$avgspiritual,'avgsosial'=>$avgsosial]);
+        // $kelas = DB::table('kelas')->get();
+        // $tahun_pelajaran = DB::table('tahun_pelajaran')->get();
+        // $bulan = DB::table('bulan')->get();
+        // $siswa = DB::table('siswa')->get();
+        return view('menu_bukuphb3sunflo',compact('kelastiga','avgspiritual','avgsosial'));
     }
 
     /**
@@ -44,12 +42,12 @@ class BukuPhbController extends Controller
      */
     public function create()
     {
-        $bukuphb = DB::table('bukuphb')->get();
+        $buku_penghubung = DB::table('buku_penghubung')->get();
         $siswa = DB::table('siswa')->get();
         $kelas = DB::table('kelas')->get();
         $tahun_pelajaran = DB::table('tahun_pelajaran')->get();
         $bulan = DB::table('bulan')->get();
-        return view('addbukuphb3sunflo',['bukuphb'=>$bukuphb,'siswa'=>$siswa,'bulan'=>$bulan,'kelas'=>$kelas,'tahun_pelajaran'=>$tahun_pelajaran]);
+        return view('addbuku_penghubung3sunflo',['buku_penghubung'=>$buku_penghubung,'siswa'=>$siswa,'bulan'=>$bulan,'kelas'=>$kelas,'tahun_pelajaran'=>$tahun_pelajaran]);
 
     }
 
@@ -61,7 +59,7 @@ class BukuPhbController extends Controller
      */
     public function store(Request $request)
     {
-        DB::table('bukuphb')->insert(array(
+        DB::table('buku_penghubung')->insert(array(
             'nomor_induk' => $request->input('nomor_induk'),
             'guru_spiritual' => $request->input('guru_spiritual'),
             'guru_sosial' => $request->input('guru_sosial'),
@@ -69,21 +67,21 @@ class BukuPhbController extends Controller
             'ortu_sosial' => $request->input('ortu_sosial'),
             'id_tapel' => $request->input('id_tapel')
         ));
-        return redirect('/menu_bukuphb3sunflo');
+        return redirect('/menu_buku_penghubung3sunflo');
     }
 
     public function cetakpdf()
     {
-        $kelastiga = DB::table('bukuphb')
-            ->select('bukuphb.*', 'siswa.nama_siswa', 'kelas.nama_kelas', 'tahun_pelajaran.tapel', 'tahun_pelajaran.semester', 'bulan.nama_bulan')
-            ->join('detail_siswa', 'bukuphb.nomor_induk', '=', 'detail_siswa.nomor_induk')
-            ->join('siswa', 'siswa.nomor_induk', '=', 'bukuphb.nomor_induk')
+        $kelastiga = DB::table('buku_penghubung')
+            ->select('buku_penghubung.*', 'siswa.nama_siswa', 'kelas.nama_kelas', 'tahun_pelajaran.tapel', 'tahun_pelajaran.semester', 'bulan.nama_bulan')
+            ->join('detail_siswa', 'buku_penghubung.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->join('siswa', 'siswa.nomor_induk', '=', 'buku_penghubung.nomor_induk')
             ->join('kelas', 'kelas.id_kelas', '=', 'detail_siswa.id_kelas')
-            ->join('tahun_pelajaran', 'bukuphb.id_tapel', '=', 'tahun_pelajaran.id_tapel')
+            ->join('tahun_pelajaran', 'buku_penghubung.id_tapel', '=', 'tahun_pelajaran.id_tapel')
             ->join('bulan', 'tahun_pelajaran.id_bulan', '=', 'bulan.id_bulan')           
             ->where('detail_siswa.id_kelas', '=', 'KLS303')
             ->get();
-        $pdf = PDF::loadView('/cetakbukuphb3sunflo', ['bukuphb' => $kelastiga]);
+        $pdf = PDF::loadView('/cetakbuku_penghubung3sunflo', ['buku_penghubung' => $kelastiga]);
         $pdf->setPaper("f4");
         return $pdf->stream();
     }
@@ -107,13 +105,13 @@ class BukuPhbController extends Controller
      */
     public function edit($id)
     {
-        $kelastiga = DB::table('bukuphb')
+        $kelastiga = DB::table('buku_penghubung')
             ->where('id_nbp', '=', $id)
-            ->select('bukuphb.*', 'siswa.nama_siswa', 'kelas.nama_kelas', 'tahun_pelajaran.tapel', 'tahun_pelajaran.semester', 'bulan.nama_bulan')
-            ->join('detail_siswa', 'bukuphb.nomor_induk', '=', 'detail_siswa.nomor_induk')
-            ->join('siswa', 'siswa.nomor_induk', '=', 'bukuphb.nomor_induk')
+            ->select('buku_penghubung.*', 'siswa.nama_siswa', 'kelas.nama_kelas', 'tahun_pelajaran.tapel', 'tahun_pelajaran.semester', 'bulan.nama_bulan')
+            ->join('detail_siswa', 'buku_penghubung.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->join('siswa', 'siswa.nomor_induk', '=', 'buku_penghubung.nomor_induk')
             ->join('kelas', 'kelas.id_kelas', '=', 'detail_siswa.id_kelas')
-            ->join('tahun_pelajaran', 'bukuphb.id_tapel', '=', 'tahun_pelajaran.id_tapel')
+            ->join('tahun_pelajaran', 'buku_penghubung.id_tapel', '=', 'tahun_pelajaran.id_tapel')
             ->join('bulan', 'tahun_pelajaran.id_bulan', '=', 'bulan.id_bulan')           
             ->where('detail_siswa.id_kelas', '=', 'KLS303')
             ->get();
@@ -121,7 +119,7 @@ class BukuPhbController extends Controller
         $tahun_pelajaran = DB::table('tahun_pelajaran')->get();
         $bulan = DB::table('bulan')->get();
         $siswa = DB::table('siswa')->get();
-        return view('editbukuphb3sunflo',['bukuphb'=>$kelastiga,'siswa'=>$siswa,'kelas'=>$kelas,'tahun_pelajaran'=>$tahun_pelajaran, 'bulan'=>$bulan]);
+        return view('editbuku_penghubung3sunflo',['buku_penghubung'=>$kelastiga,'siswa'=>$siswa,'kelas'=>$kelas,'tahun_pelajaran'=>$tahun_pelajaran, 'bulan'=>$bulan]);
 
     }
 
@@ -134,7 +132,7 @@ class BukuPhbController extends Controller
      */
     public function update(Request $request)
     {
-        DB::table('bukuphb')
+        DB::table('buku_penghubung')
             ->where('id_nbp', $request->id_nbp)
             ->update([
                 'guru_spiritual' => $request->guru_spiritual,
@@ -142,7 +140,7 @@ class BukuPhbController extends Controller
                 'ortu_spiritual' => $request->ortu_spiritual,
                 'ortu_sosial' => $request->ortu_sosial
         ]);
-        return redirect('/menu_bukuphb3sunflo');
+        return redirect('/menu_buku_penghubung3sunflo');
     }
 
     /**

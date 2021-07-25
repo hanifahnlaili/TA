@@ -2,7 +2,7 @@
     <title>Siswa Kelas 3 Sunflower</title>
 @endsection
 
-@extends('home')
+@extends('index')
 
 @section('konten')
 
@@ -38,29 +38,48 @@
                               <thead>
                                 <tr>
                                   <th>Nomor Induk</th>
-                                  <th>Nama Siswa</th>
+                                  <th>ID Ortu</th>
+                                  <th>id sekolah</th>
+                                  <th>nama siswa</th>
                                   <th>NISN Siswa</th>
-                                  <th>Kelas</th>
-                                  <th>Tahun Pelajaran</th>
+                                  <th>jenis kelamin</th>
+                                  <th>TTL</th>
+                                  <th>agama</th>
+                                  <th>anak ke</th>
+                                  <th>status dalam keluarga</th>
+                                  <th>alamat</th>
+                                  <th>telepon</th>
+                                  <th>foto</th>
+                                  <th>diterima dikelas</th>
+                                  <th>tanggal diterima dikelas</th>
                                   <th>Tools</th>
                                 </tr>
                               </thead>
                               <tbody>
                               @foreach($siswa as $t)
                                 <tr>
-                                  <td>{{$t->nomor_induk}}</td>
-                                  <td>{{$t->nama_siswa}}</td>
-                                  <td>{{$t->nisn_siswa}}</td>
-                                  <td>{{$t->nama_kelas}}</td>
-                                  <td>{{$t->tapel}}
-                                      @if ( ( $t -> semester ) == 1 ) 
-                                        Ganjil
-                                      @else
-                                        Genap
-                                      @endif
+                                <td>{{$t->NOMOR_INDUK}}</td>
+                                  <td>{{$t->ID_ORTU}}</td>
+                                  <td>{{$t->ID_SEKOLAH}}</td>
+                                  <td>{{$t->NAMA_SISWA}}</td>
+                                  <td>{{$t->NISN_SISWA}}</td>
+                                  <td>{{$t->JENIS_KELAMIN}}</td>
+                                  
+                                  <td>{{$t->TEMPAT_TANGGAL_LAHIR}}</td>
+                                  <td>{{$t->AGAMA}}</td>
+                                  <td>{{$t->ANAK_KE}}</td>
+                                  <td>{{$t->STATUS_DALAM_KELUARGA}}</td>
+                                  <td>{{$t->ALAMAT}}</td>
+                                  <td>{{$t->TELEPON}}</td>
+                                  <td>{{$t->FOTO}}</td>
+                                  
+                                  <td>{{$t->DITERIMA_DIKELAS}}</td>
+                                  <td>{{$t->TANGGAL_DITERIMA_DIKELAS}}
                                   </td>
+
+
                                   <td>
-                                    <a href="{{ url('/siswa/edit/'.$t->nomor_induk) }}" class="btn btn-info btn-sm">Edit</a>
+                                    <a href="{{ url('/siswa/edit/'.$t->NOMOR_INDUK) }}" class="btn btn-info btn-sm">Edit</a>
 	                                </td>
                                 </tr>
                               @endforeach

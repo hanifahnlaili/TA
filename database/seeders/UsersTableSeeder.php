@@ -19,7 +19,7 @@ class UsersTableSeeder extends Seeder
         \DB::table('users')->truncate();
         
         \DB::table('users')->insert([
-            'id_user' => 1,
+            // 'id_user' => 'USR001',
             'NBM_PEGAWAI' => 'PEG01',
             'tipe_user' => '1',
             'name' => 'Tutus',

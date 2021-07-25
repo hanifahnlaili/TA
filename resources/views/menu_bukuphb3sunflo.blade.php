@@ -1,5 +1,5 @@
 @section('title')
-    <title>Nilai Buku Penghubung Kelas 3 Sunflower</title>
+    <title>Nilai Buku Penghubung</title>
 @endsection
 
 @extends('home')
@@ -25,7 +25,7 @@
 
                 <div class="x_panel">
                   <div class="x_title">
-                    <h3>Tabel Rekap Nilai Buku Penghubung Kelas 3 Sunflower</h3>
+                    <h3>Tabel Rekap Nilai Buku Penghubung</h3>
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -49,9 +49,9 @@
                                   </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($bukuphb as $b)
+                                @foreach($buku_penghubung as $b)
                                   <tr>
-                                    <td>{{$loop->iteration}}</td>
+                                    <!-- <td>{{$loop->iteration}}</td> -->
                                     <td>{{$b->id_nbp}}</td>
                                     <td>{{$b->nama_siswa}}</td>
                                     <td>{{$b->guru_spiritual}}</td>

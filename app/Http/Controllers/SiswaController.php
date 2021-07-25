@@ -9,23 +9,34 @@ use \PDF;
 
 class SiswaController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function kelastigasunflower()
     {
-        $kelastiga = DB::table('siswa')
-            ->select('siswa.*', 'kelas.nama_kelas', 'tahun_pelajaran.tapel', 'tahun_pelajaran.semester')
-            ->join('detail_siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
-            ->join('kelas', 'kelas.id_kelas', '=', 'detail_siswa.id_kelas')
-            ->join('tahun_pelajaran', 'detail_siswa.id_tapel', '=', 'tahun_pelajaran.id_tapel')
-            ->where('kelas.id_kelas', '=', 'KLS303')
-            ->get();
-        $kelas = DB::table('kelas')->get();
-        $tahun_pelajaran = DB::table('tahun_pelajaran')->get();
-        return view('menu_siswa3sunflo',['siswa'=>$kelastiga,'kelas'=>$kelas,'tahun_pelajaran'=>$tahun_pelajaran]);
+        // $kelastiga = DB::table('siswa')
+        //     ->select('siswa.*', 'kelas.nama_kelas', 'tahun_pelajaran.tahunpelajaran', 'tahun_pelajaran.semester')
+        //     ->join('detail_siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
+        //     ->join('kelas', 'kelas.id_kelas', '=', 'detail_siswa.id_kelas')
+        //     ->join('tahun_pelajaran', 'detail_siswa.id_tahunpelajaran', '=', 'tahun_pelajaran.id_tahunpelajaran')
+        //     ->get();
+        $siswa = DB::table('siswa')
+        ->select('*')
+        ->get();
+        // dd($siswa);
+        // $ortu = DB::table('wali_murid')->select('*')->get();
+        // $sekolah_asal = DB::table('sekolah_asal')->select('*')->get();
+        // $kelas = DB::table('kelas')->get();
+        // $tahun_pelajaran = DB::table('tahun_pelajaran')->get();
+        return view('menu_siswa3sunflo',['siswa'=>$siswa]);
     }
 
     /**
