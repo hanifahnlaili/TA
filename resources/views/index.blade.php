@@ -13,7 +13,8 @@
     <!-- Bootstrap -->
     <link href="{{asset('tmp1/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="{{asset('tmp1/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+    <!-- <link href="{{asset('tmp1/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet"> -->
+    <link href="{{asset('tmp1/vendors/fontawesome1/css/all.css')}}" rel="stylesheet">
     <!-- NProgress -->
     <link href="{{asset('tmp1/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- iCheck -->
@@ -28,6 +29,12 @@
 
     <!-- Custom Theme Style -->
     <link href="{{asset('tmp1/build/css/custom.min.css')}}" rel="stylesheet">
+
+    <!--Regular Datatables CSS-->
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!--Responsive Extension Datatables CSS-->
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
+
   </head>
 
   <body class="nav-md footer_fixed">
@@ -214,16 +221,16 @@
                     <img src="{{asset('151811513039.jpg')}}" alt="">Hanifah Nurul Laili
                   </a>
                   <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item"  href="javascript:;"> Profile</a>
+                    <!-- <a class="dropdown-item"  href="javascript:;"> Profile</a>
                       <a class="dropdown-item"  href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
-                      </a>
-                  <a class="dropdown-item"  href="javascript:;">Help</a>
+                      </a> -->
+                  <!-- <a class="dropdown-item" >Help</a> -->
                   <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <button type="submit" class="btn btn-default">Log Out</button>
-                    <!-- <a class="dropdown-item" ><i class="fa fa-sign-out pull-right"></i> Log Out</a> -->
+                    <button type="submit" class="btn btn-default"> Log Out &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-sign-out"></i></button>
+                    <!-- <a class="dropdown-item" href="javascript:;"></a> -->
                   </form>
                   </div>
                 </li>
@@ -237,30 +244,37 @@
         <!-- page content -->
         <div class="right_col" role="main">
           <!-- top tiles -->
-          <div class="" style="display: inline-block;" >
+          <!-- <div class="" style="display: inline-block;" > -->
             <div class="tile_count">
-              <div class="col-md-4 col-sm-2  tile_stats_count">
-              </div>
-              <div class="col-md-4 col-sm-2  tile_stats_count">
-              </div>
+              @yield('konten')
             </div>
-          </div>
+          <!-- </div> -->
           <!-- /top tiles -->
 
           <!-- <div class="row">
-
-          </div> -->
-          <br />
-
-          <div class="row">
-            @yield('konten')
-
-            <div class="col-md-4 col-sm-4 ">
-              
+            <div class=" ">
             </div>
 
-          </div>
+          </div> -->
+          <!-- <br /> -->
 
+          <!-- <div class="row">
+
+
+            <div class="col-md-4 col-sm-4 ">
+            </div>
+
+            <div class="col-md-4 col-sm-4 ">
+            </div>
+
+
+            <div class="col-md-4 col-sm-4 ">
+            </div>
+
+          </div> -->
+
+
+          
         </div>
         <!-- /page content -->
 
@@ -315,6 +329,23 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset('tmp1/build/js/custom.min.js')}}"></script>
+
+    <!--Datatables -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    
+    <script>
+    $(document).ready(function() {
+
+        var table = $('#view').DataTable( {
+            responsive: true,
+            "order": [ 0, 'desc' ],
+        } )
+        .columns.adjust()
+        .responsive.recalc();
+    });
+
+    </script>
 	
   </body>
 </html>

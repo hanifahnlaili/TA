@@ -29,8 +29,11 @@ class SiswaController extends Controller
         //     ->join('tahun_pelajaran', 'detail_siswa.id_tahunpelajaran', '=', 'tahun_pelajaran.id_tahunpelajaran')
         //     ->get();
         $siswa = DB::table('siswa')
-        ->select('*')
+        ->select('siswa.NOMOR_INDUK','siswa.NISN_SISWA','siswa.NAMA_SISWA','siswa.ALAMAT','siswa.TELEPON','siswa.DITERIMA_DIKELAS','siswa.TANGGAL_DITERIMA_DIKELAS','siswa.FOTO')
+        ->join('wali_murid','siswa.ID_ORTU', '=', 'wali_murid.ID_ORTU')
+        ->join('sekolah_asal', 'sekolah_asal.ID_SEKOLAH','=','siswa.ID_SEKOLAH')
         ->get();
+
         // dd($siswa);
         // $ortu = DB::table('wali_murid')->select('*')->get();
         // $sekolah_asal = DB::table('sekolah_asal')->select('*')->get();
