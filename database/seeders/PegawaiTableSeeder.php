@@ -16,20 +16,7 @@ class PegawaiTableSeeder extends Seeder
     {
         
 
-        \DB::table('users')->truncate();
-
-        \DB::table('pegawai')->insert(array (
-            array (
-                'NBM_PEGAWAI' => 'PEG04',
-                'PEG_NBM_PEGAWAI' => NULL,
-                'NAMA_PEGAWAI' => 'Cahyo Iswahyudi, S.Pd',
-                'ALAMAT_PEGAWAI' => 'Jl Rajawali 26',
-                'TELP_PEGAWAI' => '082273124381',
-                'JABATAN_PEGAWAI' => 'Kepala Sekolah',
-                'GENDER_PEGAWAI' => 'L',
-                'FOTO_PEGAWAI' => NULL,
-            ),
-        ));
+        \DB::table('pegawai')->delete();
         
         \DB::table('pegawai')->insert(array (
             0 => 
@@ -57,7 +44,6 @@ class PegawaiTableSeeder extends Seeder
             2 => 
             array (
                 'NBM_PEGAWAI' => 'PEG03',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Asrilia Kurniasari, S.T',
                 'ALAMAT_PEGAWAI' => 'Jl Indrapura 5',
@@ -68,8 +54,18 @@ class PegawaiTableSeeder extends Seeder
             ),
             3 => 
             array (
+                'NBM_PEGAWAI' => 'PEG04',
+                'PEG_NBM_PEGAWAI' => NULL,
+                'NAMA_PEGAWAI' => 'Cahyo Iswahyudi, S.Pd',
+                'ALAMAT_PEGAWAI' => 'Jl Rajawali 26',
+                'TELP_PEGAWAI' => '082273124381',
+                'JABATAN_PEGAWAI' => 'Kepala Sekolah',
+                'GENDER_PEGAWAI' => 'L',
+                'FOTO_PEGAWAI' => NULL,
+            ),
+            4 => 
+            array (
                 'NBM_PEGAWAI' => 'PEG05',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Desy Kriswintari M.Pd',
                 'ALAMAT_PEGAWAI' => 'Jl Cempaka Putih Tmr XVII 6',
@@ -78,10 +74,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            4 => 
+            5 => 
             array (
                 'NBM_PEGAWAI' => 'PEG06',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Panca Indrawati,S.Pd',
                 'ALAMAT_PEGAWAI' => 'Jl Buncit Raya 4',
@@ -90,10 +85,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            5 => 
+            6 => 
             array (
                 'NBM_PEGAWAI' => 'PEG07',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Mitha Rizky R, S.Hum',
                 'ALAMAT_PEGAWAI' => 'Komplek Taman Ratu Bl B-5/2',
@@ -102,10 +96,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            6 => 
+            7 => 
             array (
                 'NBM_PEGAWAI' => 'PEG08',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Rahmad Sholeh, S.Pd',
                 'ALAMAT_PEGAWAI' => 'Jl Melati Putih 45',
@@ -114,10 +107,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            7 => 
+            8 => 
             array (
                 'NBM_PEGAWAI' => 'PEG09',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Siti Uswahtun K, S.Pd',
                 'ALAMAT_PEGAWAI' => 'Jl Jend. Ahmad Yani No.14',
@@ -126,10 +118,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            8 => 
+            9 => 
             array (
                 'NBM_PEGAWAI' => 'PEG10',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Hj Umi Fadilah, S.Ag',
                 'ALAMAT_PEGAWAI' => 'Jl Raya Ceger 1',
@@ -138,10 +129,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            9 => 
+            10 => 
             array (
                 'NBM_PEGAWAI' => 'PEG11',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Nur Fadhilah, S.Pd.I',
                 'ALAMAT_PEGAWAI' => 'Jl H Juanda Raya 95',
@@ -150,10 +140,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            10 => 
+            11 => 
             array (
                 'NBM_PEGAWAI' => 'PEG12',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Cholifah, S.S',
                 'ALAMAT_PEGAWAI' => 'Jl Blunyah Gede 106',
@@ -162,10 +151,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            11 => 
+            12 => 
             array (
                 'NBM_PEGAWAI' => 'PEG13',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Ainul Rofiq, S.Pd.M.Pd.I',
                 'ALAMAT_PEGAWAI' => 'Jl Kebantenan 3/2',
@@ -174,10 +162,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            12 => 
+            13 => 
             array (
                 'NBM_PEGAWAI' => 'PEG14',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Farrin Dyota R., S.Hum',
                 'ALAMAT_PEGAWAI' => 'Jl Petemon Barat 200',
@@ -186,10 +173,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            13 => 
+            14 => 
             array (
                 'NBM_PEGAWAI' => 'PEG15',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Muhammad Zainuddin, S.Pd',
                 'ALAMAT_PEGAWAI' => 'Jl Raya Jemursari 234',
@@ -198,10 +184,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            14 => 
+            15 => 
             array (
                 'NBM_PEGAWAI' => 'PEG16',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Halim S.Pd',
                 'ALAMAT_PEGAWAI' => 'Jl Kayumanis IV/99',
@@ -210,10 +195,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            15 => 
+            16 => 
             array (
                 'NBM_PEGAWAI' => 'PEG17',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Elawati , S.Pd',
                 'ALAMAT_PEGAWAI' => 'Jl Klampis Jaya 10 B',
@@ -222,10 +206,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            16 => 
+            17 => 
             array (
                 'NBM_PEGAWAI' => 'PEG18',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Khoirur Rozikin, S.Pd.I',
                 'ALAMAT_PEGAWAI' => 'Jl Sukanagara 21',
@@ -234,10 +217,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            17 => 
+            18 => 
             array (
                 'NBM_PEGAWAI' => 'PEG19',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Dra. Suprihatin, M.Pd.I',
                 'ALAMAT_PEGAWAI' => 'Jl Argopuro 11 A',
@@ -246,10 +228,9 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            18 => 
+            19 => 
             array (
                 'NBM_PEGAWAI' => 'PEG20',
-                
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Baroroh Berlian Novantika, S.E',
                 'ALAMAT_PEGAWAI' => 'Jl Banda 42',
