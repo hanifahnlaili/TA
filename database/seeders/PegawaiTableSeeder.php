@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 
 class PegawaiTableSeeder extends Seeder
 {
@@ -18,6 +19,17 @@ class PegawaiTableSeeder extends Seeder
 
         \DB::table('pegawai')->delete();
         
+        \DB::table('pegawai')->insert(array(
+            'NBM_PEGAWAI' => 'PEG04',
+            'PEG_NBM_PEGAWAI' => NULL,
+            'NAMA_PEGAWAI' => 'Cahyo Iswahyudi, S.Pd',
+            'ALAMAT_PEGAWAI' => 'Jl Rajawali 26',
+            'TELP_PEGAWAI' => '082273124381',
+            'JABATAN_PEGAWAI' => 'Kepala Sekolah',
+            'GENDER_PEGAWAI' => 'L',
+            'FOTO_PEGAWAI' => NULL,
+        ));
+
         \DB::table('pegawai')->insert(array (
             0 => 
             array (
@@ -54,17 +66,6 @@ class PegawaiTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'NBM_PEGAWAI' => 'PEG04',
-                'PEG_NBM_PEGAWAI' => NULL,
-                'NAMA_PEGAWAI' => 'Cahyo Iswahyudi, S.Pd',
-                'ALAMAT_PEGAWAI' => 'Jl Rajawali 26',
-                'TELP_PEGAWAI' => '082273124381',
-                'JABATAN_PEGAWAI' => 'Kepala Sekolah',
-                'GENDER_PEGAWAI' => 'L',
-                'FOTO_PEGAWAI' => NULL,
-            ),
-            4 => 
-            array (
                 'NBM_PEGAWAI' => 'PEG05',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
                 'NAMA_PEGAWAI' => 'Desy Kriswintari M.Pd',
@@ -74,7 +75,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            5 => 
+            4 => 
             array (
                 'NBM_PEGAWAI' => 'PEG06',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -85,7 +86,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            6 => 
+            5 => 
             array (
                 'NBM_PEGAWAI' => 'PEG07',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -96,7 +97,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            7 => 
+            6 => 
             array (
                 'NBM_PEGAWAI' => 'PEG08',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -107,7 +108,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            8 => 
+            7 => 
             array (
                 'NBM_PEGAWAI' => 'PEG09',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -118,7 +119,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            9 => 
+            8 => 
             array (
                 'NBM_PEGAWAI' => 'PEG10',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -129,7 +130,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            10 => 
+            9 => 
             array (
                 'NBM_PEGAWAI' => 'PEG11',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -140,7 +141,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            11 => 
+            10 => 
             array (
                 'NBM_PEGAWAI' => 'PEG12',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -151,7 +152,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            12 => 
+            11 => 
             array (
                 'NBM_PEGAWAI' => 'PEG13',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -162,7 +163,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            13 => 
+            12 => 
             array (
                 'NBM_PEGAWAI' => 'PEG14',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -173,7 +174,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            14 => 
+            13 => 
             array (
                 'NBM_PEGAWAI' => 'PEG15',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -184,7 +185,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            15 => 
+            14 => 
             array (
                 'NBM_PEGAWAI' => 'PEG16',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -195,7 +196,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            16 => 
+            15 => 
             array (
                 'NBM_PEGAWAI' => 'PEG17',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -206,7 +207,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            17 => 
+            16 => 
             array (
                 'NBM_PEGAWAI' => 'PEG18',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -217,7 +218,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'L',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            18 => 
+            17 => 
             array (
                 'NBM_PEGAWAI' => 'PEG19',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
@@ -228,7 +229,7 @@ class PegawaiTableSeeder extends Seeder
                 'GENDER_PEGAWAI' => 'P',
                 'FOTO_PEGAWAI' => NULL,
             ),
-            19 => 
+            18 => 
             array (
                 'NBM_PEGAWAI' => 'PEG20',
                 'PEG_NBM_PEGAWAI' => 'PEG04',
