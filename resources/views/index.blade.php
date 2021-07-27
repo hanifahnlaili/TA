@@ -67,7 +67,7 @@
               <div class="menu_section">
                 <h3>Rapor Online Dinas</h3>
                 <ul class="nav side-menu">
-                  <li><a target="_blank" href="https://rapor.dispendik.surabaya.go.id/"><i class="fa fa-university"></i> Rapor Online Dinas Pendidikan Kota Surabaya</a>
+                  <li><a target="_blank" href="https://rapor.dispendik.surabaya.go.id/"><i class="fas fa-school"></i>&emsp; Rapor Online Dinas Pendidikan Kota Surabaya</a>
                   </li>
                 </ul>
               </div>
@@ -124,7 +124,7 @@
                   <li><a href="#level1_2">Rekap Buku Penghubung</a>
                   </li> -->
                   @if(Auth::user()->tipe_user == 1)
-                  <li><a><i class="fa fa-bars"></i>Penilaian Individu Siswa<span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-bars"></i>&emsp; Penilaian Individu Siswa &emsp;<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li class="sub_menu"><a href="level2.html">Pengembangan Diri</a>
                       </li>
@@ -140,13 +140,13 @@
                       </li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-user"></i>Daftar User</a>
+                  <li><a><i class="fas fa-user"></i>&emsp; Daftar User</a>
                   </li>     
-                  <li><a href="{!! url('/menu_bukuphb3sunflo'); !!}"><i class="fa fa-book"></i>Buku Penghubung</a>
+                  <li><a href="{!! url('/menu_bukuphb3sunflo'); !!}"><i class="fas fa-book"></i>&emsp; Buku Penghubung</a>
                   </li>    
-                  <li><a href="{!! url('/menu_siswa3sunflo'); !!}"><i class="fa fa-users"></i>Daftar Siswa</a>
+                  <li><a href="{!! url('/menu_siswa3sunflo'); !!}"><i class="fas fa-users"></i>&emsp; Daftar Siswa</a>
                   </li>
-                  <li><a><i class="fa fa-database"></i>Nilai Mata Pelajaran</a>
+                  <li><a><i class="fas fa-database"></i>&emsp; Nilai Mata Pelajaran</a>
                     <!-- <ul class="nav child_menu">
                       <li class="sub_menu"><a href="level2.html">Al-Qur'an Hadist</a>
                       </li>
