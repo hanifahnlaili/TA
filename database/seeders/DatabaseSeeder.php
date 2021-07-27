@@ -32,5 +32,9 @@ class DatabaseSeeder extends Seeder
         // $this->call(SekolahAsalTableSeeder::class);
         // $this->call(SiswaTableSeeder::class);
         // $this->call(TahunPelajaranTableSeeder::class);  
+        $this->call(DetailKelasTableSeeder::class);
+        $this->call(KomponenNilaiAkhirTableSeeder::class);
+        $this->call(KomponenNilaiTengahTableSeeder::class);
+        $this->call(RangeNilaiTableSeeder::class);
     }
 }
