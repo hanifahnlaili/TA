@@ -3,7 +3,7 @@
     <link rel="icon" href="asset_2_s1o_icon.ico" type="image/ico" />
 @endsection
 
-@extends('home')
+@extends('index')
 
 @section('konten')
 <div class="">
@@ -40,28 +40,67 @@
                                 <input type="text" name="nisn_siswa" required="required" class="form-control">
                             </div>
                         </div>
-                        <div class="item form-group row">
-                            <label class="control-label col-md-3 col-sm-3 label-align">Pilih Kelas<span class="required">*</span></label>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">No Telepon Siswa <span class="required">*</span>
+                            </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <select class="form-control" name="id_kelas" required>
-                                    @foreach( $kelas as $k )
-                                        <option value="{{ $k -> id_kelas }}">
-                                            {{ $k -> nama_kelas }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="no_telp_siswa" class="form-control">
                             </div>
                         </div>
-                        <div class="item form-group row">
-                            <label class="control-label col-md-3 col-sm-3 label-align">Pilih Tahun Pelajaran<span class="required">*</span></label>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Alamat Siswa <span class="required">*</span>
+                            </label>
                             <div class="col-md-6 col-sm-6 ">
-                                <select class="form-control" name="id_tapel" required>
-                                    @foreach( $tahun_pelajaran as $d )
-                                        <option value="{{ $d -> id_tapel }}">
-                                            {{ $d -> tapel }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="alamat_siswa" required="required" class="form-control">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Ayah <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" name="nama_ayah" required="required" class="form-control">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Pekerjaan Ayah <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" name="pekerjaan_ayah" required="required" class="form-control">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Ibu <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" name="nama_ibu" required="required" class="form-control">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Pekerjaan Ibu <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" name="pekerjaan_ibu" required="required" class="form-control">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Alamat Orang Tua <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" name="alamat_ortu" required="required" class="form-control">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Sekolah <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" name="nama_sekolah" required="required" class="form-control">
+                            </div>
+                        </div>
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Alamat Sekolah <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 ">
+                                <input type="text" name="alamat_sekolah" required="required" class="form-control">
                             </div>
                         </div>
                         <div class="ln_solid"></div>

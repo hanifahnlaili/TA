@@ -64,17 +64,41 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
+        $wali_murid_selected = null;
+        if(DB::table('wali_murid')->where('nama_ayah', $request->input('nama_ayah'))->where('nama_ibu', $request->input('nama_ibu'))->first()){
+            $wali_murid_selected = DB::table('wali_murid')->where('nama_ayah', $request->input('nama_ayah'))->where('nama_ibu', $request->input('nama_ibu'))->first();
+        }else{
+            DB::table('wali_murid')->insert(array(
+                'nama_ayah' => $request->input('nama_ayah'),
+                'nama_ibu' => $request->input('nama_ibu'),
+                'alamat_ortu' => $request->input('alamat_ortu'),
+                'pekerjaan_ayah' => $request->input('pekerjaan_ayah'),
+                'pekerjaan_ibu' => $request->input('pekerjaan_ibu')
+            ));
+            $wali_murid_selected = DB::table('wali_murid')->where('nama_ayah', $request->input('nama_ayah'))->where('nama_ibu', $request->input('nama_ibu'))->first();
+        }
+
+        $sekolah_asal_selected = null;
+        if(DB::table('sekolah_asal')->where('nama_sekolah', $request->input('nama_sekolah'))->first()){
+            $sekolah_asal_selected = DB::table('sekolah_asal')->where('nama_sekolah', $request->input('nama_sekolah'))->first();
+        }else{
+            $sekolah_asal_selected = DB::table('sekolah_asal')->insert(array(
+                'nama_sekolah' => $request->input('nama_sekolah'),
+                'alamat_sekolah' => $request->input('alamat_sekolah'),
+            ));
+            $sekolah_asal_selected = DB::table('sekolah_asal')->where('nama_sekolah', $request->input('nama_sekolah'))->first();
+        }
+
         DB::table('siswa')->insert(array(
+            'id_ortu' => $wali_murid_selected->ID_ORTU,
+            'id_sekolah' => $sekolah_asal_selected->ID_SEKOLAH,
             'nomor_induk' => $request->input('nomor_induk'),
             'nama_siswa' => $request->input('nama_siswa'),
-            'nisn_siswa' => $request->input('nisn_siswa')
+            'nisn_siswa' => $request->input('nisn_siswa'),
+            'telepon' => $request->input('no_telp_siswa'),
+            'alamat' => $request->input('alamat_siswa')
         ));
-        DB::table('detail_siswa')->insert([
-            'id_kelas' => $request->id_kelas,
-            'id_tapel' => $request->id_tapel,
-            'nomor_induk' =>$request->nomor_induk
-        ]);
-        return redirect('/menu_siswakls3sunflo');
+        return redirect('/menu_siswa3sunflo');
     }
 
     /**
@@ -87,10 +111,10 @@ class SiswaController extends Controller
     {
         $kelastiga=DB::table('siswa')
             ->where('siswa.nomor_induk','=',$id)
-            ->select('siswa.*','kelas.nama_kelas','tahun_pelajaran.tapel', 'tahun_pelajaran.semester')
+            ->select('siswa.*','kelas.nama_kelas','tahun_pelajaran.id_tahunpelajaran', 'tahun_pelajaran.semester')
             ->join('detail_siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
             ->join('kelas', 'kelas.id_kelas', '=', 'detail_siswa.id_kelas')
-            ->join('tahun_pelajaran', 'tahun_pelajaran.id_tapel', '=', 'detail_siswa.id_tapel')
+            ->join('tahun_pelajaran', 'tahun_pelajaran.id_tahunpelajaran', '=', 'detail_siswa.id_tahunpelajaran')
             ->get();
         $kelas=DB::table('kelas')->get();
         $tahun_pelajaran=DB::table('tahun_pelajaran')->get();
@@ -138,10 +162,8 @@ class SiswaController extends Controller
      */
     public function destroy($id)
     {
-        //DB::table('siswa')
-        //->where('siswa.nomor_induk',$id)
-        //->delete();
-        //return redirect('/siswakls3sunflo')->with('success','Data telah dihapus.');
+        DB::table('siswa')->where('siswa.nomor_induk',$id)->delete();
+        return redirect('/menu_siswa3sunflo')->with('success','Data telah dihapus.');
     }
 
     /**

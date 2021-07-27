@@ -59,7 +59,12 @@
                       <td>{{$t->FOTO}}</td>
                       <td align="center">
                         <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t->NOMOR_INDUK) }}"><i class="fa fa-edit"></i></a>  
-                        <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Detail Siswa"><i class="fa fa-info-circle"></i></button>                        
+                        <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Detail Siswa"><i class="fa fa-info-circle"></i></button>
+                        {{-- <form action="{{ url('siswa/delete/'.$t->NOMOR_INDUK) }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Hapus Siswa"><i class="fa fa-trash"></i></button>
+                        </form> --}}
                       </td>
                     </tr>
                   @endforeach

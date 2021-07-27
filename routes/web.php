@@ -34,11 +34,12 @@ Auth::routes();
 
     //siswa
     Route::get('/menu_siswa3sunflo', [App\Http\Controllers\SiswaController::class, 'kelastigasunflower']);
-    // Route::get('/siswa/create',\App\Http\Controllers\SiswaController::class . '@create');
-    // Route::post('/siswa/store',\App\Http\Controllers\SiswaController::class . '@store');
-    // Route::get('/siswa/edit/{id}',\App\Http\Controllers\SiswaController::class . '@edit');
+    Route::get('/siswa/create',[\App\Http\Controllers\SiswaController::class, 'create']);
+    Route::post('/siswa/store',[App\Http\Controllers\SiswaController::class, 'store']);
+    Route::get('/siswa/edit/{id}',[\App\Http\Controllers\SiswaController::class, 'edit']);
     // Route::post('/siswa/update',\App\Http\Controllers\SiswaController::class . '@update');
     // Route::get('/siswa/cetakpdf',\App\Http\Controllers\SiswaController::class . '@cetakpdf');
+    Route::delete('/siswa/delete/{id}',[\App\Http\Controllers\SiswaController::class, 'destroy']);
 
     //user
     // Route::get('/menu_userpengguna',\App\Http\Controllers\UserController::class . '@index');

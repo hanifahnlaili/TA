@@ -2,7 +2,7 @@
     <title>Edit Siswa Kelas 3 Sunflower</title>
 @endsection
 
-@extends('home')
+@extends('index')
 
 @section('konten')
 <div class="">
