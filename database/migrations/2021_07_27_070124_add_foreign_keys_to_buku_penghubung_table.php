@@ -15,7 +15,7 @@ class AddForeignKeysToBukuPenghubungTable extends Migration
     {
         Schema::table('buku_penghubung', function (Blueprint $table) {
             $table->foreign('NOMOR_INDUK', 'FK_MEMILIKI_2')->references('NOMOR_INDUK')->on('detail_siswa')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-            $table->foreign('ID_KI', 'FK_MEMILIKI_3')->references('ID_KI')->on('kompetensi_inti')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+            // $table->foreign('ID_KI', 'FK_MEMILIKI_3')->references('ID_KI')->on('kompetensi_inti')->onUpdate('RESTRICT')->onDelete('RESTRICT');
         });
     }
 
@@ -28,7 +28,7 @@ class AddForeignKeysToBukuPenghubungTable extends Migration
     {
         Schema::table('buku_penghubung', function (Blueprint $table) {
             $table->dropForeign('FK_MEMILIKI_2');
-            $table->dropForeign('FK_MEMILIKI_3');
+            // $table->dropForeign('FK_MEMILIKI_3');
         });
     }
 }

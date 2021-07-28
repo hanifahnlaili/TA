@@ -146,6 +146,10 @@
                   </li>    
                   <li><a href="{!! url('/menu_siswa3sunflo'); !!}"><i class="fas fa-users"></i>&emsp; Daftar Siswa</a>
                   </li>
+                  <li><a><i class="fas fa-file-invoice"></i>&emsp; Rapor Tengah Semester</a>
+                  </li>
+                  <li><a><i class="fas fa-file-invoice"></i>&emsp; Rapor Akhir Semester</a>
+                  </li>
                   <li><a><i class="fas fa-database"></i>&emsp; Nilai Mata Pelajaran</a>
                     <!-- <ul class="nav child_menu">
                       <li class="sub_menu"><a href="level2.html">Al-Qur'an Hadist</a>

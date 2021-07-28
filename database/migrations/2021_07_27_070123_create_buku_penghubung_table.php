@@ -15,7 +15,7 @@ class CreateBukuPenghubungTable extends Migration
     {
         Schema::create('buku_penghubung', function (Blueprint $table) {
             $table->char('ID_NBP', 10)->primary();
-            $table->char('ID_KI', 10)->index('FK_MEMILIKI_3');
+            // $table->char('ID_KI', 10)->index('FK_MEMILIKI_3');
             $table->char('NOMOR_INDUK', 10)->index('FK_MEMILIKI_2');
             $table->integer('GURU_SPIRITUAL');
             $table->integer('GURU_SOSIAL');

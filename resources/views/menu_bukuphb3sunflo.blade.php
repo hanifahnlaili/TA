@@ -36,7 +36,6 @@
                               <table id="datatable" class="table table-bordered" style="width:100%">
                                 <thead>
                                   <tr>
-                                    <th>No.</th>
                                     <th>ID Nilai Buku Penghubung</th>
                                     <th>Nama Siswa</th>
                                     <th>Nilai Guru Spiritual</th>
