@@ -59,7 +59,7 @@ Auth::routes();
     // Route::get('/kbm/cetakpdf',\App\Http\Controllers\KBMController::class . '@cetakpdf');
 
     //presensi
-    // Route::get('/menu_presensi3sunflo',\App\Http\Controllers\PresensiController::class . '@prn3sunflo');
+    Route::get('/menu_presensi3sunflo',\App\Http\Controllers\PresensiController::class . '@prn3sunflo');
     // Route::get('/presensi/create',\App\Http\Controllers\PresensiController::class . '@create');
     // Route::post('/presensi/store',\App\Http\Controllers\PresensiController::class . '@store');
     // Route::get('/presensi/edit/{id}',\App\Http\Controllers\PresensiController::class . '@edit');

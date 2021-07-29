@@ -124,7 +124,7 @@
                   <li><a href="#level1_2">Rekap Buku Penghubung</a>
                   </li> -->
                   @if(Auth::user()->tipe_user == 1)
-                  <li><a><i class="fas fa-bars"></i>&emsp; Penilaian Individu Siswa &emsp;<span class="fas fa-chevron-down"></span></a>
+                  {{-- <li><a><i class="fas fa-bars"></i>&emsp; Penilaian Individu Siswa &emsp;<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li class="sub_menu"><a href="level2.html">Pengembangan Diri</a>
                       </li>
@@ -139,6 +139,8 @@
                       <li><a href="#level2_1">Ketidakhadiran</a>
                       </li>
                     </ul>
+                  </li> --}}
+                  <li><a href="{{  url('/menu_presensi3sunflo') }}"><i class="fas fa-bars"></i>&emsp; Penilaian Individu Siswa</a>
                   </li>
                   <li><a><i class="fas fa-user"></i>&emsp; Daftar User</a>
                   </li>     

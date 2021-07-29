@@ -18,19 +18,12 @@ class PresensiController extends Controller
     public function prn3sunflo()
     {
         $presensi = DB::table('presensi')
-            ->select('presensi.*','siswa.nama_siswa','tahun_pelajaran.tapel','tahun_pelajaran.semester')
+            ->select('presensi.*','siswa.nama_siswa')
             ->join('detail_siswa', 'presensi.nomor_induk', '=', 'detail_siswa.nomor_induk')
-            ->join('tahun_pelajaran', 'detail_siswa.id_tapel', '=', 'tahun_pelajaran.id_tapel')
-            ->join('bulan', 'bulan.id_bulan', '=', 'tahun_pelajaran.id_bulan')
-            ->join('kelas', 'kelas.id_kelas', '=', 'detail_siswa.id_kelas')
             ->join('siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
-            ->where('kelas.id_kelas', '=', 'KLS303')
             ->get();
         $siswa = DB::table('siswa')->get();
-        $kelas = DB::table('kelas')->get();
-        $bulan = DB::table('bulan')->get();
-        $tahun_pelajaran = DB::table('tahun_pelajaran')->get();
-        return view('menu_presensi3sunflo',['bulan'=>$bulan,'presensi'=>$presensi,'kelas'=>$kelas,'tahun_pelajaran'=>$tahun_pelajaran,'siswa'=>$siswa]);
+        return view('menu_presensi3sunflo',['presensi'=>$presensi, 'siswa'=>$siswa]);
     }
 
     /**
