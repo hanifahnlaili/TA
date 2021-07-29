@@ -59,7 +59,7 @@
                       <td>{{$t->FOTO}}</td>
                       <td align="center">
                         <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t->NOMOR_INDUK) }}"><i class="fa fa-edit"></i></a>  
-                        <button type="button" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Detail Siswa"><i class="fa fa-info-circle"></i></button>
+                        <button type="button" class="btn btn-info" title="Detail Siswa" data-toggle="modal" data-target="#detailsiswa_{{ $t->NOMOR_INDUK }}"><i class="fa fa-info-circle"></i></button>
                         {{-- <form action="{{ url('siswa/delete/'.$t->NOMOR_INDUK) }}" method="POST">
                             @method('DELETE')
                             @csrf
@@ -70,38 +70,74 @@
                   @endforeach
                   </tbody>
                 </table>
-
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#detailsiswa">
-                  Launch demo modal
-                </button>
-
-                <!-- Modal -->
-                <div class="modal fade" id="detailsiswa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        ...
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
               </div>
           </div>
       </div>
     </div>
 </div>
 </div>                
-
+                <!-- Modal -->
+                @foreach ($siswa as $s)
+                  <div class="modal-lg fade" id="detailsiswa_{{ $s->NOMOR_INDUK }}" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col">
+                                <h4 style="font-style: bold">KETERANGAN TENTANG DIRI SISWA</h4>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6">1. Nama Siswa Lengkap</div>
+                              <div class="col-6">: {{ $s->NAMA_SISWA}}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6">2. Nomor Induk/NISN</div>
+                              <div class="col-6">: {{ $s->NOMOR_INDUK }}/{{ $s->NISN_SISWA }}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6">3. Jenis Kelamin</div>
+                              <div class="col-6">: {{ ($s) ? $s->JENIS_KELAMIN : '-'}}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6">4. Tempat dan Tanggal Lahir</div>
+                              <div class="col-6">: {{ $s->TEMPAT_TANGGAL_LAHIR }}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6">5. Agama</div>
+                              <div class="col-6">: {{ $s->AGAMA }}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6">6. Anak ke</div>
+                              <div class="col-6">: {{ $s->ANAK_KE }}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6">7. Status Dalam Keluarga</div>
+                              <div class="col-6">: {{ $s->STATUS_DALAM_KELUARGA }}</div>
+                            </div>
+                            <div class="row">
+                              <div class="col-6">8. Alamat</div>
+                              <div class="col-6">: {{ $s->ALAMAT }}</div>
+                              <div class="col-6">Telepon Rumah</div>
+                              <div class="col-6">: {{ $s->NAMA_SISWA }}</div>
+                            </div>
+                            {{-- <div class="col-6">9. Diterima Di Sekolah Ini</div>
+                              <div class="col-6">: {{ $s->nama_siswa }}</div>
+                          </div> --}}
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>                  
+                @endforeach
 @endsection
