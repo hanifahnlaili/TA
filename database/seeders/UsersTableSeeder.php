@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
                 'tipe_user' => '1',
                 'name' => 'Tutus',
                 'email' => 'tutus@gmail.com',
-                'password' => '$2y$10$NOiIA3JNvFv4PQo5okruSO51nBCks6Ohj20uVO51udkWvDL2Mw0Bu',
+                'password' => bcrypt('tutus'),
                 'updated_at' => '2021-07-23 02:05:37',
                 'created_at' => '2021-07-23 02:05:37',
             ),

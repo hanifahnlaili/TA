@@ -124,7 +124,7 @@
                   <li><a href="#level1_2">Rekap Buku Penghubung</a>
                   </li> -->
                   @if(Auth::user()->tipe_user == 1)
-                  {{-- <li><a><i class="fas fa-bars"></i>&emsp; Penilaian Individu Siswa &emsp;<span class="fas fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fas fa-bars"></i>&emsp; Penilaian Individu Siswa &emsp;<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li class="sub_menu"><a href="level2.html">Pengembangan Diri</a>
                       </li>
@@ -139,55 +139,21 @@
                       <li><a href="#level2_1">Ketidakhadiran</a>
                       </li>
                     </ul>
-                  </li> --}}
-                  <li><a href="{{  url('/menu_presensi3sunflo') }}"><i class="fas fa-bars"></i>&emsp; Penilaian Individu Siswa</a>
+                  </li>  -->
+                  <li><a href="{{  url('/menu_penilaian') }}"><i class="fas fa-bars"></i>&emsp; Penilaian Individu Siswa</a>
                   </li>
-                  <li><a><i class="fas fa-user"></i>&emsp; Daftar User</a>
+                  <li><a href="{!! url('/menu_userpengguna') !!}"><i class="fas fa-user"></i>&emsp; Daftar User</a>
                   </li>     
                   <li><a href="{!! url('/menu_bukuphb3sunflo'); !!}"><i class="fas fa-book"></i>&emsp; Buku Penghubung</a>
                   </li>    
-                  <li><a href="{!! url('/menu_siswa3sunflo'); !!}"><i class="fas fa-users"></i>&emsp; Daftar Siswa</a>
+                  <li><a href="{!! url('/menu_siswa3sunflo'); !!}"><i class="fas fa-users"></i>&emsp;Daftar Siswa</a>
                   </li>
-                  <li><a><i class="fas fa-file-invoice"></i>&emsp; Rapor Tengah Semester</a>
+                  <li><a href="{!! url('/menu_kdkls3'); !!}"><i class="fas fa-th-list"></i>&emsp; Kompetensi Dasar</a>
                   </li>
-                  <li><a><i class="fas fa-file-invoice"></i>&emsp; Rapor Akhir Semester</a>
+                  <li><a href="{!! url('/menu_raportengah'); !!}"><i class="fas fa-file-invoice"></i>&emsp; Rapor Tengah Semester</a>
                   </li>
-                  <li><a><i class="fas fa-database"></i>&emsp; Nilai Mata Pelajaran</a>
-                    <!-- <ul class="nav child_menu">
-                      <li class="sub_menu"><a href="level2.html">Al-Qur'an Hadist</a>
-                      </li>
-                      <li><a href="#level2_1">Aqidah Akhlaq</a>
-                      </li>
-                      <li><a href="#level2_2">Tarikh Islam</a>
-                      </li>
-                      <li><a href="#level2_2">Fiqih Ibadah</a>
-                      </li>
-                      <li><a href="#level2_2">Kemuhammadiyahan</a>
-                      </li>
-                      <li><a href="#level2_2">Pendidikan Pancasila dan Kewarganegaraan</a>
-                      </li>
-                      <li><a href="#level2_2">Bahasa Indonesia</a>
-                      </li>
-                      <li><a href="#level2_2">Matematika</a>
-                      </li>
-                      <li><a href="#level2_2">Ilmu Pengetahuan Alam</a>
-                      </li>
-                      <li><a href="#level2_2">Ilmu Pengetahuan Sosial</a>
-                      </li>
-                      <li><a href="#level2_2">Seni Budaya dan Prakarya</a>
-                      </li>
-                      <li><a href="#level2_2">Pendidikan Jasmani, Olahraga, dan Kesehatan</a>
-                      </li>
-                      <li><a href="#level2_2">Bahasa Jawa</a>
-                      </li>
-                      <li><a href="#level2_2">Bahasa Arab</a>
-                      </li>
-                      <li><a href="#level2_2">Bahasa Inggris</a>
-                      </li>
-                      <li><a href="#level2_2">Teknologi Informasi dan Komunikasi</a>
-                      </li>
-                    </ul> -->
-                  </li>    
+                  <li><a href="{!! url('/menu_raporakhir') !!}"><i class="fas fa-file-invoice"></i>&emsp; Rapor Akhir Semester</a>
+                  </li>
                   @endif        
                 </ul>
               </div>

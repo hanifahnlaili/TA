@@ -23,16 +23,18 @@ class BukuPhbController extends Controller
 
     public function phbkls3sunflo()
     {
-        $kelastiga = DB::table('buku_penghubung')->select('buku_penghubung.*')->get();
-        $avgspiritual = DB::table('buku_penghubung')->avg('buku_penghubung.guru_spiritual','buku_penghubung.ortu_spiritual');
-        $avgspiritual = round($avgspiritual);
-        $avgsosial = DB::table('buku_penghubung')->avg('buku_penghubung.guru_sosial','buku_penghubung.ortu_sosial');
-        $avgsosial = round($avgsosial);
-        // $kelas = DB::table('kelas')->get();
-        // $tahun_pelajaran = DB::table('tahun_pelajaran')->get();
-        // $bulan = DB::table('bulan')->get();
-        // $siswa = DB::table('siswa')->get();
-        return view('menu_bukuphb3sunflo',compact('kelastiga','avgspiritual','avgsosial'));
+        $buku_penghubung = DB::table('buku_penghubung')
+        ->select('buku_penghubung.*','siswa.nama_siswa')
+        ->join('detail_siswa','detail_siswa.nomor_induk','=','buku_penghubung.nomor_induk')
+        ->join('siswa','siswa.nomor_induk','=','detail_siswa.nomor_induk')
+        ->get();
+        $avgspiritual = DB::table('buku_penghubung')->select('guru_spiritual','ortu_spiritual')->avg('guru_spiritual','ortu_spiritual');
+        // $avgspiritual = round($avgspiritual);
+        $avgsosial = DB::table('buku_penghubung')->select('guru_sosial','ortu_sosial')->avg('guru_sosial','ortu_sosial');
+        // $avgsosial = round($avgsosial);
+        $siswa = DB::table('siswa')->get();
+        $detail_siswa = DB::table('detail_siswa')->get();
+        return view('menu_bukuphb3sunflo',compact('buku_penghubung','avgspiritual','avgsosial','siswa','detail_siswa'));
     }
 
     /**

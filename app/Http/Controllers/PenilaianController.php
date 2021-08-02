@@ -8,22 +8,47 @@ use App\Http\Controllers\Controller;
 use \PDF;
 
 
-class PresensiController extends Controller
+class PenilaianController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function prn3sunflo()
+    public function penilaian()
     {
         $presensi = DB::table('presensi')
             ->select('presensi.*','siswa.nama_siswa')
             ->join('detail_siswa', 'presensi.nomor_induk', '=', 'detail_siswa.nomor_induk')
             ->join('siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
             ->get();
+        $kepribadian = DB::table('kepribadian')
+            ->select('kepribadian.*','siswa.nama_siswa')
+            ->join('detail_siswa', 'kepribadian.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->join('siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->get();
+        $ekstrakurikuler = DB::table('ekstrakurikuler')
+            ->select('ekstrakurikuler.*','siswa.nama_siswa')
+            ->join('detail_siswa', 'ekstrakurikuler.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->join('siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->get();
+        $kondisi_kesehatan = DB::table('kondisi_kesehatan')
+            ->select('kondisi_kesehatan.*','siswa.nama_siswa')
+            ->join('detail_siswa', 'kondisi_kesehatan.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->join('siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->get();
+        $perkembangan_fisik = DB::table('perkembangan_fisik')
+            ->select('perkembangan_fisik.*','siswa.nama_siswa')
+            ->join('detail_siswa', 'perkembangan_fisik.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->join('siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->get();
+        $prestasi = DB::table('prestasi')
+            ->select('prestasi.*','siswa.nama_siswa')
+            ->join('detail_siswa', 'prestasi.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->join('siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
+            ->get();
         $siswa = DB::table('siswa')->get();
-        return view('menu_presensi3sunflo',['presensi'=>$presensi, 'siswa'=>$siswa]);
+        return view('menu_penilaian',compact('presensi','kepribadian','ekstrakurikuler','kondisi_kesehatan','perkembangan_fisik','prestasi','siswa'));
     }
 
     /**

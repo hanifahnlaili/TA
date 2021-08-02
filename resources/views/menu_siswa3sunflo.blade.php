@@ -10,13 +10,10 @@
 <div class="col-md-12 col-sm-12 ">
 
   <div class="x_panel">
-  <h3 style="margin-top: 30px;">Tambah dan Cetak Tabel Siswa
+  <h3>Tambah Data Siswa
     <ul class="nav navbar-right panel_toolbox">
-    <a class="btn btn-app" href="{{url('/siswa/create')}}">
-      <i class="fa fa-user-plus"></i> Add
-    </a>
-    <a class="btn btn-app" href="{{url('/siswa/cetakpdf')}}">
-      <i class="fa fa-save"></i> Print
+    <a class="btn btn-primary" href="{{url('/siswa/create')}}">
+      <i class="fas fa-user-plus"></i>  Add
     </a>
     </ul>
   </h3>
@@ -35,15 +32,15 @@
                 <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                   <thead>
                     <tr>
-                      <th>Nomor Induk</th>
-                      <th>NISN Siswa</th>
-                      <th>Nama siswa</th>
-                      <th>Alamat</th>
-                      <th>Telepon</th>
-                      <th>Diterima Dikelas</th>
-                      <th>Tanggal Diterima Dikelas</th>
-                      <th>Foto</th>
-                      <th>Tools</th>
+                      <th style="vertical-align:middle">Nomor Induk</th>
+                      <th style="vertical-align:middle">NISN Siswa</th>
+                      <th style="vertical-align:middle">Nama siswa</th>
+                      <th style="vertical-align:middle">Alamat</th>
+                      <th style="vertical-align:middle">Telepon</th>
+                      <th style="vertical-align:middle">Diterima Dikelas</th>
+                      <th style="vertical-align:middle">Tanggal Diterima Dikelas</th>
+                      <th style="vertical-align:middle">Foto</th>
+                      <th style="vertical-align:middle">Tools</th>
                     </tr>
                   </thead>
                   <tbody>

@@ -2,7 +2,7 @@
     <title>Kompetensi Dasar Kelas 3</title>
 @endsection
 
-@extends('home')
+@extends('index')
 
 @section('konten')
 
@@ -12,10 +12,10 @@
             <div class="col-md-12 col-sm-12 ">
 
               <div class="x_panel">
-              <h3 style="margin-top: 30px;">Cetak Kompetensi Dasar
+              <h3>Tambah Kompetensi Dasar
                 <ul class="nav navbar-right panel_toolbox">
-                <a class="btn btn-app" href="{{url('/kompetensidasar/cetakpdf')}}">
-                  <i class="fa fa-save"></i> Print
+                <a role="button" class="btn btn-primary" href="{{url('/kompetensidasar/cetakpdf')}}">
+                  <i class="fas fa-plus-square"></i> Add
                 </a>
                 </ul>
               </h3>
@@ -34,83 +34,25 @@
                             <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                               <thead>
                                 <tr>
-                                  <th rowspan="7">Tools</th>
-                                  <th rowspan="7">ID Kompetensi Dasar</th>
-                                  <th rowspan="7">Nama Mata Pelajaran</th>
-                                  <th rowspan="7">Kompetensi Inti</th>
-                                  <th>Detail Kompetensi Dasar</th>
+                                  <th style="vertical-align:middle">ID Kompetensi Dasar</th>
+                                  <th style="vertical-align:middle">Nama Mata Pelajaran</th>
+                                  <th style="vertical-align:middle">Kompetensi Inti</th>
+                                  <th style="vertical-align:middle">Nama Kompetensi Dasar</th>
+                                  <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
+                                  <th style="vertical-align:middle">Tools</th>
                                 </tr>
                               </thead>
                               <tbody>
-                              @foreach($kompetensidasar as $k)
+                              @foreach($kompetensi_dasar as $k)
                                 <tr>
-                                  <td rowspan="7"> 
-                                    <a href="{{ url('/kompetensidasar/edit/'.$k->id_kd) }}" class="btn btn-info btn-sm">Edit</a>
-                                  </td>
-                                  <td rowspan="7">{{$k->id_kd}}</td>
-                                  <td rowspan="7">{{$k->nama_mapel}}</td>
-                                  <td rowspan="7">{{$k->nama_ki}}</td>
+                                  <td>{{$k->id_kd}}</td>
+                                  <td>{{$k->nama_matapelajaran}}</td>
+                                  <td>{{$k->nama_ki}}</td>
+                                  <td>{{$k->nama_kd}}</td>
                                   <td>{{$k->detail_kd}}</td>
-                                  <!-- <td>{{$k->detail_kd1}}</td>
-                                  <td>{{$k->detail_kd2}}</td>
-                                  <td>{{$k->detail_kd3}}</td>
-                                  <td>{{$k->detail_kd4}}</td>
-                                  <td>{{$k->detail_kd5}}</td>
-                                  <td>{{$k->detail_kd6}}</td> -->
-                                </tr>
-                                <tr>
-                                  <td rowspan="7">
-                                    <a href="{{ url('/kompetensidasar/edit/'.$k->id_kd) }}" class="btn btn-info btn-sm">Edit</a>
+                                  <td> 
+                                    <a href="{{ url('/kompetensi_dasar/edit/'.$k->id_kd) }}" class="btn btn-info btn-sm">Edit</a>
                                   </td>
-                                  <td rowspan="7">{{$k->id_kd}}</td>
-                                  <td rowspan="7">{{$k->nama_mapel}}</td>
-                                  <td rowspan="7">{{$k->nama_ki}}</td>
-                                  <td>{{$k->detail_kd1}}</td>
-                                </tr>
-                                <tr>
-                                <td rowspan="7">
-                                    <a href="{{ url('/kompetensidasar/edit/'.$k->id_kd) }}" class="btn btn-info btn-sm">Edit</a>
-                                  </td>
-                                  <td rowspan="7">{{$k->id_kd}}</td>
-                                  <td rowspan="7">{{$k->nama_mapel}}</td>
-                                  <td rowspan="7">{{$k->nama_ki}}</td>
-                                  <td>{{$k->detail_kd2}}</td>
-                                </tr>
-                                <tr>
-                                <td rowspan="7">
-                                    <a href="{{ url('/kompetensidasar/edit/'.$k->id_kd) }}" class="btn btn-info btn-sm">Edit</a>
-                                  </td>
-                                  <td rowspan="7">{{$k->id_kd}}</td>
-                                  <td rowspan="7">{{$k->nama_mapel}}</td>
-                                  <td rowspan="7">{{$k->nama_ki}}</td>
-                                  <td>{{$k->detail_kd3}}</td>
-                                </tr>
-                                <tr>
-                                <td rowspan="7">
-                                    <a href="{{ url('/kompetensidasar/edit/'.$k->id_kd) }}" class="btn btn-info btn-sm">Edit</a>
-                                  </td>
-                                  <td rowspan="7">{{$k->id_kd}}</td>
-                                  <td rowspan="7">{{$k->nama_mapel}}</td>
-                                  <td rowspan="7">{{$k->nama_ki}}</td>
-                                  <td>{{$k->detail_kd4}}</td>
-                                </tr>
-                                <tr>
-                                <td rowspan="7">
-                                    <a href="{{ url('/kompetensidasar/edit/'.$k->id_kd) }}" class="btn btn-info btn-sm">Edit</a>
-                                  </td>
-                                  <td rowspan="7">{{$k->id_kd}}</td>
-                                  <td rowspan="7">{{$k->nama_mapel}}</td>
-                                  <td rowspan="7">{{$k->nama_ki}}</td>
-                                  <td>{{$k->detail_kd5}}</td>
-                                </tr>
-                                <tr>
-                                <td rowspan="7">
-                                    <a href="{{ url('/kompetensidasar/edit/'.$k->id_kd) }}" class="btn btn-info btn-sm">Edit</a>
-                                  </td>
-                                  <td rowspan="7">{{$k->id_kd}}</td>
-                                  <td rowspan="7">{{$k->nama_mapel}}</td>
-                                  <td rowspan="7">{{$k->nama_ki}}</td>
-                                  <td>{{$k->detail_kd6}}</td>
                                 </tr>
                               @endforeach
                               </tbody>

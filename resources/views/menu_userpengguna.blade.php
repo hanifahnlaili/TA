@@ -2,7 +2,7 @@
     <title>Daftar User</title>
 @endsection
 
-@extends('home')
+@extends('index')
 
 @section('konten')
 <div class="">
@@ -11,12 +11,13 @@
             <div class="col-md-12 col-sm-12 ">
 
               <div class="x_panel">
-              <h3 style="margin-top: 30px;">Tambah User Baru
+              <h3>Tambah User Baru
                 <ul class="nav navbar-right panel_toolbox">
-                <a class="btn btn-app" href="/user/create">
-                  <i class="fa fa-user-plus">
-                  </i>
-                </a></ul></h3>
+                <a class="btn btn-primary" href="/user/create">
+                  <i class="fas fa-user-plus"></i> Add
+                </a>
+                </ul>
+              </h3>
               </div>
 
                 <div class="x_panel">
@@ -33,22 +34,24 @@
                               <table id="datatable" class="table table-striped table-bordered" style="width:100%">
                                 <thead>
                                   <tr>
-                                    <th>ID User</th>
-                                    <th>Username</th>
-                                    <th>Password</th>
-                                    <th>Nama Tipe User</th>
-                                    <th>Tools</th>
+                                    <th style="vertical-align:middle">ID User</th>
+                                    <th style="vertical-align:middle">Nama Pegawai</th>
+                                    <th style="vertical-align:middle">Tipe User</th>
+                                    <th style="vertical-align:middle">Email</th>
+                                    <th style="vertical-align:middle">Password</th>
+                                    <th style="vertical-align:middle">Tools</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($userpengguna as $u)
+                                @foreach($users as $u)
                                   <tr>
                                     <td>{{$u->id_user}}</td>
-                                    <td>{{$u->username}}</td>
+                                    <td>{{$u->nama_pegawai}}</td>
+                                    <td>{{$u->tipe_user}}</td>
+                                    <td>{{$u->email}}</td>
                                     <td>{{$u->password}}</td>
-                                    <td>{{$u->nama_tipe_user}}</td>
                                     <td>
-                                    <a href="{{url('/user/edit/'.$u->id_user)}}" class="btn btn-info btn-sm">Edit</a>
+                                    <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{url('/user/edit/'.$u->id_user)}}"><i class="fa fa-edit"></i></a>
 	                                </td>
                                   </tr>
                                 @endforeach

@@ -15,11 +15,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        $userpengguna = DB::table('users')
-        ->join('tipe_user','tipe_user.id_tipe_user','=','users.id_tipe_user')
+        $users = DB::table('users')
+        ->select('users.*','pegawai.nama_pegawai')
+        ->join('pegawai','pegawai.nbm_pegawai','users.nbm_pegawai')
         ->get();
-        $tipe_user = DB::table('tipe_user')->get();
-        return view('menu_userpengguna',['users'=>$userpengguna,'tipe_user'=>$tipe_user]);
+        $pegawai = DB::table('pegawai')->select('*')->get();
+        return view('menu_userpengguna',compact('users','pegawai'));
     }
 
     /**
