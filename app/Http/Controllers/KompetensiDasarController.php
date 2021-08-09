@@ -17,11 +17,15 @@ class KompetensiDasarController extends Controller
     public function index()
     {
         $kd = DB::table('kompetensi_dasar')
-            ->select('kompetensi_dasar.*',  'mata_pelajaran.nama_matapelajaran', 'kompetensi_inti.nama_ki')
-            ->join('mata_pelajaran', 'mata_pelajaran.id_matapelajaran', '=', 'kompetensi_dasar.id_matapelajaran')
-            ->join('kompetensi_inti', 'kompetensi_inti.id_ki', '=', 'kompetensi_dasar.id_ki')
+            ->select('kompetensi_dasar.*',  'mata_pelajaran.nama_matapelajaran','tahun_pelajaran.tahunpelajaran', 'kompetensi_inti.nama_ki')
+            ->join('mata_pelajaran', 'mata_pelajaran.id_matapelajaran', 'kompetensi_dasar.id_matapelajaran')
+            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
+            ->join('kompetensi_inti', 'kompetensi_inti.id_ki', 'kompetensi_dasar.id_ki')
             ->get();
-        return view('menu_kdkls3',['kompetensi_dasar'=>$kd]);
+        $mapel = DB::table('mata_pelajaran')->select('*')->get();
+        $tapel = DB::table('tahun_pelajaran')->select('*')->get();
+        $ki = DB::table('kompetensi_inti')->select('*')->get();
+        return view('menu_kdkls3',compact('kd','mapel','tapel','ki'));
     }
 
     /**

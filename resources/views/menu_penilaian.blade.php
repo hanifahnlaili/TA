@@ -37,12 +37,80 @@
                 <div class="x_panel">
                   <h3>Tambah Presensi
                     <ul class="nav navbar-right panel_toolbox">
-                    <a role="button" class="btn btn-info" href="{{url('/presensi/create')}}">
-                      <i class="fa fa-user-plus"></i> Add
-                    </a>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addpresensi">
+                      <i class="fas fa-plus-circle"></i> Add
+                    </button>
                     </ul>
                   </h3>
                 </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="addpresensi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Tambah Presensi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="" method="POST">
+                          @method('PUT')
+                          @csrf
+
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <label style="font-size: medium;">Pilih Siswa </label>
+                            </div>
+                            <div class="col md-6">
+                              <select class="form-control" id="">
+                                <option>Nama siswa</option>
+                              </select>
+                            </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <label style="font-size: medium;">Jumlah Sakit</label>
+                            </div>
+                            <div class="col md-6">
+                              <input type="number" class="form-control" placeholder="Sakit">
+                            </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <label style="font-size: medium;">Jumlah Ijin</label>
+                            </div>
+                            <div class="col md-6">
+                              <input type="number" class="form-control" placeholder="Ijin">
+                            </div>
+                          </div>
+                          <br>
+
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <label style="font-size: medium;">Jumlah Absen</label>
+                            </div>
+                            <div class="col md-6">
+                              <input type="number" class="form-control" placeholder="Absen">
+                            </div>
+                          </div>
+
+
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                        <button type="button" class="btn btn-primary">Submit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="x_panel">
                   <div class="x_title">
                     <h3>Tabel Presensi</h3>
@@ -67,13 +135,13 @@
                           <tbody>
                           @foreach($presensi as $p)
                             <tr>
-                              <td>{{$p->id_presensi}}</td>
+                              <td>{{$p->ID_PRESENSI}}</td>
                               <td>{{$p->nama_siswa}}</td>
-                              <td>{{$p->sakit}}</td>
-                              <td>{{$p->ijin}}</td>
-                              <td>{{$p->absen}}</td>
+                              <td>{{$p->SAKIT}}</td>
+                              <td>{{$p->IJIN}}</td>
+                              <td>{{$p->ABSEN}}</td>
                               <td>
-                              <a href="{{ url('/presensi/edit/'.$p->id_presensi) }}" class="btn btn-info btn-sm">Edit</a>
+                              <a href="{{ url('/presensi/edit/'.$p->ID_PRESENSI) }}" class="btn btn-info btn-sm">Edit</a>
                             </td>
                             </tr>
                           @endforeach
@@ -371,10 +439,8 @@
               </div>
 
             </div>
-            </nav>
           </div>
       </div>
-    </div>
-</div>                            
+</div>
 
 @endsection

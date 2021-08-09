@@ -35,11 +35,10 @@ class SiswaController extends Controller
         ->get();
 
         // dd($siswa);
-        // $ortu = DB::table('wali_murid')->select('*')->get();
-        // $sekolah_asal = DB::table('sekolah_asal')->select('*')->get();
-        // $kelas = DB::table('kelas')->get();
-        // $tahun_pelajaran = DB::table('tahun_pelajaran')->get();
-        return view('menu_siswa3sunflo',['siswa'=>$siswa]);
+        $wali_murid = DB::table('wali_murid')->select('*')->get();
+        $sekolah_asal = DB::table('sekolah_asal')->select('*')->get();
+        $pegawai = DB::table('pegawai')->select('*')->get();
+        return view('menu_siswa3sunflo',compact('siswa','wali_murid','sekolah_asal','pegawai'));
     }
 
     /**
@@ -140,17 +139,24 @@ class SiswaController extends Controller
         return redirect('/menu_siswakls3sunflo');
     }
 
-    public function cetakpdf()
+    public function cetakpdf($id)
     {
         $siswa = DB::table('siswa')
-            ->select('siswa.*', 'kelas.nama_kelas', 'tahun_pelajaran.tapel', 'tahun_pelajaran.semester')
-            ->join('detail_siswa', 'siswa.nomor_induk', '=', 'detail_siswa.nomor_induk')
-            ->join('kelas', 'kelas.id_kelas', '=', 'detail_siswa.id_kelas')
-            ->join('tahun_pelajaran', 'detail_siswa.id_tapel', '=', 'tahun_pelajaran.id_tapel')
-            ->where('kelas.id_kelas', '=', 'KLS303')
-            ->get();
-        $pdf = PDF::loadView('/cetaksiswakls3sunflo', ['siswa' => $siswa]);
-        $pdf->setPaper("f4");
+        ->select('siswa.*', 'wali_murid.*', 'sekolah_asal.*')
+        ->join('wali_murid','siswa.ID_ORTU', '=', 'wali_murid.ID_ORTU')
+        ->join('sekolah_asal', 'sekolah_asal.ID_SEKOLAH','=','siswa.ID_SEKOLAH')
+        // ->join('detail_siswa','detail_siswa.NOMOR_INDUK','siswa.NOMOR_INDUK')
+        // ->join('kelas','kelas.ID_KELAS','detail_siswa.ID_KELAS')
+        // ->join('detail_kelas','detail_kelas.ID_KELAS','kelas.ID_KELAS')
+        // ->join('pegawai','pegawai.NBM_PEGAWAI','detail_kelas.NBM_PEGAWAI')
+        ->where('siswa.NOMOR_INDUK','=',$id)
+        // ->where('pegawai.NBM_PEGAWAI','=','PEG04')
+        ->get();
+        $wali_murid = DB::table('wali_murid')->select('*')->get();
+        $sekolah_asal = DB::table('sekolah_asal')->select('*')->get();
+        $pegawai = DB::table('pegawai')->select('*')->get();
+        $pdf = PDF::loadView('cetaksiswakls3sunflo', compact('siswa','wali_murid','sekolah_asal','pegawai'));
+        $pdf->setPaper("a4");
         return $pdf->stream();
     }
 

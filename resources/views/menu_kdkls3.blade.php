@@ -14,12 +14,94 @@
               <div class="x_panel">
               <h3>Tambah Kompetensi Dasar
                 <ul class="nav navbar-right panel_toolbox">
-                <a role="button" class="btn btn-primary" href="{{url('/kompetensidasar/cetakpdf')}}">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addkd">
                   <i class="fas fa-plus-square"></i> Add
-                </a>
+                </button>
                 </ul>
               </h3>
               </div>
+
+              <!-- Modal -->
+              @foreach($kd as $b)
+              <div class="modal fade" id="addkd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Tambah Kompetensi Dasar</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="" method="POST">
+                        @method('PUT')
+                        @csrf
+
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <label style="font-size: medium;">Pilih Mata Pelajaran </label>
+                          </div>
+                          <div class="col md-6">
+                            <select class="form-control" id="">
+                              <option>Nama Mata Pelajaran</option>
+                            </select>
+                          </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <label style="font-size: medium;">Pilih Tahun Pelajaran</label>
+                          </div>
+                          <div class="col md-6">
+                            <select class="form-control" id="">
+                              <option>Tahun Pelajaran</option>
+                            </select>
+                          </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <label style="font-size: medium;">Pilih KI</label>
+                          </div>
+                          <div class="col md-6">
+                            <select class="form-control" id="">
+                              <option>KI - 3</option>
+                            </select>
+                          </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <label style="font-size: medium;">Nama Kompetensi Dasar</label>
+                          </div>
+                          <div class="col md-6">
+                            <input type="text" class="form-control" placeholder="Nama Kompetensi Dasar">
+                          </div>
+                        </div>
+                        <br>
+
+                        <div class="row">
+                          <div class="col-sm-4">
+                            <label style="font-size: medium;">Detail Kompetensi Dasar</label>
+                          </div>
+                          <div class="col md-6">
+                            <input type="text" class="form-control" placeholder="Detail Kompetensi Dasar">
+                          </div>
+                        </div>
+
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                      <button type="button" class="btn btn-primary">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              @endforeach
 
                 <div class="x_panel">
                   <div class="x_title">
@@ -43,15 +125,15 @@
                                 </tr>
                               </thead>
                               <tbody>
-                              @foreach($kompetensi_dasar as $k)
+                              @foreach($kd as $k)
                                 <tr>
-                                  <td>{{$k->id_kd}}</td>
+                                  <td>{{$k->ID_KD}}</td>
                                   <td>{{$k->nama_matapelajaran}}</td>
-                                  <td>{{$k->nama_ki}}</td>
-                                  <td>{{$k->nama_kd}}</td>
-                                  <td>{{$k->detail_kd}}</td>
+                                  <td>{{$k->ID_KI}}</td>
+                                  <td>{{$k->NAMA_KD}}</td>
+                                  <td>{{$k->DETAIL_KD}}</td>
                                   <td> 
-                                    <a href="{{ url('/kompetensi_dasar/edit/'.$k->id_kd) }}" class="btn btn-info btn-sm">Edit</a>
+                                    <a href="{{ url('/kompetensi_dasar/edit/'.$k->ID_KD) }}" class="btn btn-info btn-sm">Edit</a>
                                   </td>
                                 </tr>
                               @endforeach

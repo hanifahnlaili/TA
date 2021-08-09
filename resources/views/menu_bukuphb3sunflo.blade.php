@@ -10,15 +10,101 @@
   <div class="x_panel">
   <h3>Tambah Data Nilai Buku Penghubung 
     <ul class="nav navbar-right panel_toolbox">
-    <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-      <i class="fa fa-user-plus"></i> Add
-    </a>
-    <!-- <a class="btn btn-app" href="{{url('/bukuphb/cetakpdf')}}">
-      <i class="fa fa-save"></i> Print
-    </a> -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addbukupenghubung">
+      <i class="fas fa-plus-circle"></i> Add
+    </button>
     </ul>
   </h3>
   </div>
+
+  <!-- Modal -->
+  @foreach($buku_penghubung as $b)
+  <div class="modal fade" id="addbukupenghubung" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Nilai Buku Penghubung</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form action="" method="POST">
+            @method('PUT')
+            @csrf
+
+            <div class="row">
+              <div class="col-sm-4">
+                <label style="font-size: medium;">Pilih Siswa </label>
+              </div>
+              <div class="col md-6">
+                <select class="form-control" id="">
+                  <option>Nama siswa</option>
+                </select>
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <label style="font-size: medium;">Nilai Guru Spiritual</label>
+              </div>
+              <div class="col md-6">
+                <input type="number" class="form-control" placeholder="Nilai Guru Spiritual">
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <label style="font-size: medium;">Nilai Ortu Spiritual</label>
+              </div>
+              <div class="col md-6">
+                <input type="number" class="form-control" placeholder="Nilai Ortu Spiritual">
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <label style="font-size: medium;">Nilai Guru Sosial</label>
+              </div>
+              <div class="col md-6">
+                <input type="number" class="form-control" placeholder="Nilai Guru Sosial">
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <label style="font-size: medium;">Nilai Ortu Sosial</label>
+              </div>
+              <div class="col md-6">
+                <input type="number" class="form-control" placeholder="Nilai Ortu Sosial">
+              </div>
+            </div>
+            <br>
+
+            <div class="row">
+              <div class="col-sm-4">
+                <label style="font-size: medium;">Deskripsi</label>
+              </div>
+              <div class="col md-6">
+                <input type="text" class="form-control" placeholder="Deskripsi">
+              </div>
+            </div> 
+
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  @endforeach
 
     <div class="x_panel">
       <div class="x_title">
@@ -42,8 +128,6 @@
                         <th style="vertical-align:middle">Nilai Orang Tua Sosial</th>
                         <th style="vertical-align:middle">Rata-rata Sosial</th>
                         <th style="vertical-align:middle">Deskripsi</th>
-                        <!-- <th>Kompetensi Dasar Spiritual</th>
-                        <th>Kompetensi Dasar Sosial</th> -->
                         <th style="vertical-align:middle">Tools</th>
                       </tr>
                     </thead>
@@ -59,8 +143,6 @@
                         <td>{{$b->ORTU_SOSIAL}}</td>
                         <td>{{$avgsosial}}</td>
                         <td>{{$b->DESKRIPSI}}</td>
-                        <!-- <td>{{$b->KD_SPIRITUAL}}</td>
-                        <td>{{$b->KD_SOSIAL}}</td> -->
                         <td>
                           <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$b->ID_NBP) }}"><i class="fa fa-edit"></i></a>
                           <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$b->ID_NBP) }}"><i class="fa fa-info-circle"></i></a>

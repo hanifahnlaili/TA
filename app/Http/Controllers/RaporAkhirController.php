@@ -15,7 +15,7 @@ class RaporAkhirController extends Controller
     public function raporakhir()
     {
         $raporakhir = DB::table('komponen_nilai_akhir')
-            ->select('komponen_nilai_akhir.*','siswa.nama_siswa','mata_pelajaran.nama_matapelajaran','kompetensi_inti.id_ki')
+            ->select('komponen_nilai_akhir.*','siswa.nama_siswa','mata_pelajaran.nama_matapelajaran','mata_pelajaran.nilai_kbm','kompetensi_inti.id_ki')
             ->join('siswa','siswa.nomor_induk','komponen_nilai_akhir.nomor_induk')
             ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','komponen_nilai_akhir.id_matapelajaran')
             ->join('detail_kelas','detail_kelas.id_matapelajaran','mata_pelajaran.id_matapelajaran')
