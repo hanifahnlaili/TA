@@ -9,6 +9,10 @@ use \PDF;
 
 class KompetensiDasarController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,14 +21,14 @@ class KompetensiDasarController extends Controller
     public function index()
     {
         $kd = DB::table('kompetensi_dasar')
-            ->select('kompetensi_dasar.*',  'mata_pelajaran.nama_matapelajaran','tahun_pelajaran.tahunpelajaran', 'kompetensi_inti.nama_ki')
+            ->select('kompetensi_dasar.*',  'mata_pelajaran.nama_matapelajaran','mata_pelajaran.id_matapelajaran','tahun_pelajaran.tahunpelajaran', 'kompetensi_inti.nama_ki')
             ->join('mata_pelajaran', 'mata_pelajaran.id_matapelajaran', 'kompetensi_dasar.id_matapelajaran')
             ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
             ->join('kompetensi_inti', 'kompetensi_inti.id_ki', 'kompetensi_dasar.id_ki')
             ->get();
-        $mapel = DB::table('mata_pelajaran')->select('*')->get();
-        $tapel = DB::table('tahun_pelajaran')->select('*')->get();
-        $ki = DB::table('kompetensi_inti')->select('*')->get();
+        $mapel = DB::table('mata_pelajaran')->select('id_matapelajaran','nama_matapelajaran')->get();
+        $tapel = DB::table('tahun_pelajaran')->select('id_tahunpelajaran','tahunpelajaran')->get();
+        $ki = DB::table('kompetensi_inti')->select('id_ki')->get();
         return view('menu_kdkls3',compact('kd','mapel','tapel','ki'));
     }
 
@@ -101,7 +105,33 @@ class KompetensiDasarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id_matapelajaran = DB::table('mata_pelajaran')
+            ->where([
+                'id_matapelajaran' => $request->id_matapelajaran
+            ])->first();
+
+            // dd($id_matapelajaran);
+        
+        $id_tahunpelajaran = DB::table('tahun_pelajaran')
+        ->where([
+            'id_tahunpelajaran' => $request->id_tahunpelajaran
+        ])->first();
+
+        $id_ki = DB::table('kompetensi_inti')
+        ->where([
+            'id_ki' => $request->id_ki
+        ])->first();
+
+        DB::table('kompetensi_dasar')
+        ->insert([
+            'id_matapelajaran' => $id_matapelajaran->ID_MATAPELAJARAN,
+            'id_tahunpelajaran' => $id_tahunpelajaran->ID_TAHUNPELAJARAN,
+            'id_ki' => $id_ki->ID_KI,
+            'nama_kd' =>$request->nama_kd,
+            'detail_kd' => $request->detail_kd
+        ]);
+
+        return redirect('/menu_kdkls3')->with('alert_success', 'Data Kompetensi Dasar Berhasil Disimpan.');
     }
 
     /**

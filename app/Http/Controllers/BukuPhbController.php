@@ -28,33 +28,10 @@ class BukuPhbController extends Controller
         ->join('detail_siswa','detail_siswa.nomor_induk','=','buku_penghubung.nomor_induk')
         ->join('siswa','siswa.nomor_induk','=','detail_siswa.nomor_induk')
         ->get();
-        // $rerata = [];
-        // $ambilspr1 = DB::table('buku_penghubung')->get(['guru_spiritual']);
-        // $ambilspr2 = DB::table('buku_penghubung')->get(['ortu_spiritual']);
-        // // $avgspiritual1 = ($avgspiritual);
-        // $avgspiritual1 = average($ambilspr1,$ambilspr2);
-        // $avgspiritual2 = round($avgspiritual1);
-        //ambil tiap row nomor induk siswa pake for loop
-        
-        $avgspiritual = DB::table('buku_penghubung')->avg('guru_spiritual','ortu_spiritual');
-        $avgsosial = DB::table('buku_penghubung')->avg('guru_sosial','ortu_sosial');
-        // // $avgsosial1 = ($avgsosial);
-        // $avgsosial1 = floatval($avgsosial);
-        // $avgsosial2 = round($avgsosial1);
         $siswa = DB::table('siswa')->select('*')->get();
         $detail_siswa = DB::table('detail_siswa')->select('*')->get();
 
-        // foreach($buku_penghubung as{
-
-        // }
-        // for($i=0; $i<count($ambilspr1); $i++){
-        //     $avg = (($ambilspr1[$i]) + ($ambilspr2[$i])) / 2;
-        //     $avg = round($avg);
-
-        //     array_push($rerata, $avg);
-        // }
-        // dd(gettype($rerata));
-        return view('menu_bukuphb3sunflo',compact('buku_penghubung','avgspiritual','avgsosial','siswa','detail_siswa'));
+        return view('menu_bukuphb3sunflo',compact('buku_penghubung','siswa','detail_siswa'));
     }
 
     /**

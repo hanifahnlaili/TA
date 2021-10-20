@@ -50,7 +50,7 @@ Route::get('/menu_userpengguna',\App\Http\Controllers\UserController::class . '@
 
 //kompetensi dasar
 Route::get('/menu_kdkls3',\App\Http\Controllers\KompetensiDasarController::class . '@index');
-// Route::get('/kompetensidasar/cetakpdf',\App\Http\Controllers\KompetensiDasarController::class . '@cetakpdf');
+Route::post('/menu_kdkls3/store',\App\Http\Controllers\KompetensiDasarController::class . '@store');
 
 //penilaian individu siswa
 Route::get('/menu_penilaian',\App\Http\Controllers\PenilaianController::class . '@penilaian');
@@ -63,9 +63,11 @@ Route::get('/menu_penilaian',\App\Http\Controllers\PenilaianController::class . 
 
 //rapor tengah semester
 Route::get('/menu_raportengah',\App\Http\Controllers\RaporTengahController::class . '@raportengah');
+Route::post('/menu_raportengah/store',\App\Http\Controllers\RaporTengahController::class .  '@store');
 
 //rapor akhir semester
 Route::get('/menu_raporakhir',\App\Http\Controllers\RaporAkhirController::class . '@raporakhir');
+Route::post('/menu_raporakhir/store',\App\Http\Controllers\RaporAkhirController::class .  '@store');
 
 // });
 

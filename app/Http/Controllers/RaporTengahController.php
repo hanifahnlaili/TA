@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class RaporTengahController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,183 +21,65 @@ class RaporTengahController extends Controller
     public function raportengah()
     {
         $raportengah = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
+            ->select('komponen_nilai_tengah.*','siswa.nomor_induk','siswa.nama_siswa','kompetensi_dasar.id_kd','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','range_nilai.range_huruf','range_nilai.id_range_nilai','range_nilai.keterangan')
             ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
             ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
             ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL001')
+            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
+            // ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
+            // ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
+            // ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
+            ->where('mata_pelajaran.id_matapelajaran','MPL001')
             ->get();
-        $siswa = DB::table('siswa')->select('*')->get();
-        $kd = DB::table('kompetensi_dasar')->select('*')->get();
-        $mapel = DB::table('mata_pelajaran')->select('*')->get();
-        $tapel = DB::table('tahun_pelajaran')->select('*')->get();
-        $detail_siswa = DB::table('detail_siswa')->select('*')->get();
-        $kelas = DB::table('kelas')->select('*')->get();
-        $rangenilai = DB::table('range_nilai')->select('*')->get();
-        $matapel = DB::table('mata_pelajaran')->get('id_matapelajaran');
-        // $nihar1 = DB::table('komponen');
-        
-        $raportengah1 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
+
+            $raportengah1 = DB::table('komponen_nilai_tengah')
+            ->select('komponen_nilai_tengah.*','siswa.nomor_induk','siswa.nama_siswa','kompetensi_dasar.id_kd','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','range_nilai.range_huruf','range_nilai.id_range_nilai','range_nilai.keterangan')
             ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
             ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
             ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL002')
+            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
+            // ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
+            // ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
+            // ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
+            ->where('mata_pelajaran.id_matapelajaran','MPL002')
             ->get();
 
             $raportengah2 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
+            ->select('komponen_nilai_tengah.*','siswa.nomor_induk','siswa.nama_siswa','kompetensi_dasar.id_kd','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','range_nilai.range_huruf','range_nilai.id_range_nilai','range_nilai.keterangan')
             ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
             ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
             ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL003')
+            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
+            // ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
+            // ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
+            // ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
+            ->where('mata_pelajaran.id_matapelajaran','MPL003')
             ->get();
 
-            $raportengah3 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
+        $raportengah3 = DB::table('komponen_nilai_tengah')
+            ->select('komponen_nilai_tengah.*','siswa.nomor_induk','siswa.nama_siswa','kompetensi_dasar.id_kd','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','range_nilai.range_huruf','range_nilai.id_range_nilai','range_nilai.keterangan')
             ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
             ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
             ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL004')
-            ->get();
-
-            $raportengah4 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
-            ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
             ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
-            ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL005')
+            // ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
+            // ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
+            // ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
+            ->where('mata_pelajaran.id_matapelajaran','MPL006')
             ->get();
+        $siswa = DB::table('siswa')->select('nomor_induk','nama_siswa')->get();
+        $kd = DB::table('kompetensi_dasar')->select('id_kd','detail_kd')->get();
+        $mapel = DB::table('mata_pelajaran')->select('id_matapelajaran','nama_matapelajaran')->get();
+        $tapel = DB::table('tahun_pelajaran')->select('id_tahunpelajaran','tahunpelajaran')->get();
+        $detail_siswa = DB::table('detail_siswa')->select('*')->get();
+        $kelas = DB::table('kelas')->select('*')->get();
+        $range_nilai = DB::table('range_nilai')->select('id_range_nilai','range_huruf')->get();
+        $matapel = DB::table('mata_pelajaran')->get('id_matapelajaran');
 
-            $raportengah5 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
-            ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
-            ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL006')
-            ->get();
+        // dd($raportengah3);
+        
 
-            $raportengah6 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
-            ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
-            ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL007')
-            ->get();
-
-            $raportengah7 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
-            ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
-            ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL008')
-            ->get();
-
-            $raportengah8 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
-            ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
-            ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL009')
-            ->get();
-
-            $raportengah9 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
-            ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
-            ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL010')
-            ->get();
-
-            $raportengah10 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
-            ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
-            ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL011')
-            ->get();
-
-            $raportengah11 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
-            ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
-            ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL012')
-            ->get();
-
-            $raportengah12 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
-            ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
-            ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL013')
-            ->get();
-
-            $raportengah13 = DB::table('komponen_nilai_tengah')
-            ->select('komponen_nilai_tengah.*','siswa.nama_siswa','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')
-            ->join('siswa','siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kompetensi_dasar','kompetensi_dasar.id_kd','komponen_nilai_tengah.id_kd')
-            ->join('mata_pelajaran','mata_pelajaran.id_matapelajaran','kompetensi_dasar.id_matapelajaran')
-            ->join('tahun_pelajaran','tahun_pelajaran.id_tahunpelajaran','kompetensi_dasar.id_tahunpelajaran')
-            ->join('detail_siswa','detail_siswa.nomor_induk','komponen_nilai_tengah.nomor_induk')
-            ->join('kelas','kelas.id_kelas','detail_siswa.id_kelas')
-            ->join('range_nilai','range_nilai.id_range_nilai','komponen_nilai_tengah.id_range_nilai')
-            ->where('mata_pelajaran.id_matapelajaran','=','MPL014')
-            ->get();
-
-        return view('menu_raportengah', compact('raportengah','raportengah1','raportengah2','raportengah3','raportengah4','raportengah5','raportengah6','raportengah7','raportengah8','raportengah9','raportengah10','raportengah11','raportengah12','raportengah13','siswa','kd','mapel','tapel','detail_siswa','kelas','matapel'));
+        return view('menu_raportengah', compact('raportengah','raportengah1','raportengah2','raportengah3','siswa','kd','mapel','tapel','detail_siswa','kelas','matapel'));
     }
 
     /**
@@ -215,15 +101,34 @@ class RaporTengahController extends Controller
      */
     public function store(Request $request)
     {
-        $komponen = DB::table('komponen_nilai_tengah')->select('*')->get();
-        $siswa = DB::table('siswa')->select('*')->get();
-        $kd = DB::table('kompetensi_dasar')->select('*')->get();
-        $mapel = DB::table('mata_pelajaran')->select('*')->get();
-        $tapel = DB::table('tahun_pelajaran')->select('*')->get();
-        $detail_siswa = DB::table('detail_siswa')->select('*')->get();
-        $kelas = DB::table('kelas')->select('*')->get();
-        $rangenilai = DB::table('range_nilai')->select('*')->get();
-        $matapel = DB::table('mata_pelajaran')->get('id_matapelajaran');
+        $siswa = DB::table('siswa')
+        ->where([
+            'nomor_induk' => $request->nomor_induk
+        ])->first();
+
+        // dd($siswa);
+
+        $kd = DB::table('kompetensi_dasar')
+        ->where([
+            'id_kd' => $request->id_kd
+        ])->first();
+
+        $range_nilai = DB::table('range_nilai')
+        ->where([
+            'id_range_nilai' => $request->id_range_nilai
+        ])->first();
+
+        DB::table('komponen_nilai_tengah')
+        ->insert([
+            'nomor_induk' => $siswa->NOMOR_INDUK,
+            'id_kd' => $kd->ID_KD,
+            // 'id_range_nilai' => $range_nilai->ID_RANGE_NILAI,
+            'nilai_harian1' => $request->nilai_harian1,
+            'nilai_harian2' => $request->nilai_harian2,
+            'nilai_PTS' => $request->nilai_PTS
+        ]);
+
+        return redirect('/menu_raportengah')->with('alert', 'Data Nilai Rapor Tengah Semester Berhasil Disimpan.');
     }
 
     /**

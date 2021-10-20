@@ -22,7 +22,6 @@
               </div>
 
               <!-- Modal -->
-              @foreach($kd as $b)
               <div class="modal fade" id="addkd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
@@ -33,8 +32,8 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form action="" method="POST">
-                        @method('PUT')
+                      <form action="{{ url('/menu_kdkls3/store') }}" method="POST">
+                        @method('POST')
                         @csrf
 
                         <div class="row">
@@ -42,8 +41,12 @@
                             <label style="font-size: medium;">Pilih Mata Pelajaran </label>
                           </div>
                           <div class="col md-6">
-                            <select class="form-control" id="">
-                              <option>Nama Mata Pelajaran</option>
+                            <select class="form-control" id="id_matapelajaran" name="id_matapelajaran">
+                            @foreach($mapel as $s)
+                            <option value="{{ $s->id_matapelajaran }}">
+                              {{ $s->nama_matapelajaran }}
+                            </option>
+                            @endforeach
                             </select>
                           </div>
                         </div>
@@ -54,8 +57,12 @@
                             <label style="font-size: medium;">Pilih Tahun Pelajaran</label>
                           </div>
                           <div class="col md-6">
-                            <select class="form-control" id="">
-                              <option>Tahun Pelajaran</option>
+                            <select class="form-control" id="id_tahunpelajaran" name="id_tahunpelajaran">
+                              @foreach($tapel as $tp)
+                              <option value="{{ $tp->id_tahunpelajaran }}">
+                                {{ $tp->tahunpelajaran }}
+                              </option>
+                              @endforeach
                             </select>
                           </div>
                         </div>
@@ -66,8 +73,12 @@
                             <label style="font-size: medium;">Pilih KI</label>
                           </div>
                           <div class="col md-6">
-                            <select class="form-control" id="">
-                              <option>KI - 3</option>
+                            <select class="form-control" id="id_ki" name="id_ki">
+                            @foreach($ki as $ki)
+                            <option value="{{ $ki->id_ki }}">
+                              {{ $ki->id_ki }}
+                            </option>
+                            @endforeach
                             </select>
                           </div>
                         </div>
@@ -78,7 +89,7 @@
                             <label style="font-size: medium;">Nama Kompetensi Dasar</label>
                           </div>
                           <div class="col md-6">
-                            <input type="text" class="form-control" placeholder="Nama Kompetensi Dasar">
+                            <input type="text" class="form-control" name="nama_kd" placeholder="Nama Kompetensi Dasar">
                           </div>
                         </div>
                         <br>
@@ -88,20 +99,21 @@
                             <label style="font-size: medium;">Detail Kompetensi Dasar</label>
                           </div>
                           <div class="col md-6">
-                            <input type="text" class="form-control" placeholder="Detail Kompetensi Dasar">
+                            <input type="text" class="form-control" name="detail_kd" placeholder="Detail Kompetensi Dasar">
                           </div>
                         </div>
+                        <br>
 
+                        <div class="modal-footer">
+                          <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
                       </form>
                     </div>
-                    <div class="modal-footer">
-                      <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-                      <button type="button" class="btn btn-primary">Submit</button>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
-              @endforeach
 
                 <div class="x_panel">
                   <div class="x_title">

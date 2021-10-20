@@ -67,7 +67,6 @@
       </div>
 
       <!-- Modal -->
-      @foreach($raportengah as $b)
       <div class="modal fade" id="addalquran" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
@@ -78,8 +77,8 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="" method="POST">
-                @method('PUT')
+              <form action="{{ url('/menu_raportengah/store') }}" method="POST">
+                @method('POST')
                 @csrf
 
                 <div class="row">
@@ -87,8 +86,11 @@
                     <label style="font-size: medium;">Pilih Siswa </label>
                   </div>
                   <div class="col md-6">
-                    <select class="form-control" id="">
-                      <option>Nama siswa</option>
+                    <select class="form-control" id="nomor_induk" name="nomor_induk">
+                      @foreach($siswa as $s)
+                      <option value="{{ $s->nomor_induk }}">
+                        {{ $s->nama_siswa }}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
@@ -99,8 +101,10 @@
                     <label style="font-size: medium;">Pilih Kompetensi Dasar</label>
                   </div>
                   <div class="col md-6">
-                    <select class="form-control" id="">
-                      <option>Nama Kompetensi Dasar</option>
+                    <select class="form-control" id="id_kd" name="id_kd">
+                      @foreach($kd as $kd)
+                      <option value="{{ $kd->id_kd }}">{{ $kd->detail_kd }}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
@@ -108,10 +112,20 @@
 
                 <div class="row">
                   <div class="col-sm-4">
-                    <label style="font-size: medium;">Nilai Harian</label>
+                    <label style="font-size: medium;">Nilai Harian 1</label>
                   </div>
                   <div class="col md-6">
-                    <input type="number" class="form-control" placeholder="Nilai Harian">
+                    <input type="number" class="form-control" placeholder="Nilai Harian 1" name="nilai_harian1">
+                  </div>
+                </div>
+                <br>
+
+                <div class="row">
+                  <div class="col-sm-4">
+                    <label style="font-size: medium;">Nilai Harian 2</label>
+                  </div>
+                  <div class="col md-6">
+                    <input type="number" class="form-control" placeholder="Nilai Harian 2" name="nilai_harian2">
                   </div>
                 </div>
                 <br>
@@ -121,33 +135,34 @@
                     <label style="font-size: medium;">Nilai PTS</label>
                   </div>
                   <div class="col md-6">
-                    <input type="number" class="form-control" placeholder="Nilai PTS">
+                    <input type="number" class="form-control" placeholder="Nilai PTS" name="nilai_PTS">
                   </div>
                 </div>
                 <br>
 
-                <div class="row">
+                <!-- <div class="row">
                   <div class="col-sm-4">
                     <label style="font-size: medium;"> Pilih Range Nilai</label>
                   </div>
                   <div class="col md-6">
-                    <select class="form-control" id="">
-                      <option>A</option>
+                    <select class="form-control" id="id_range_nilai" name="id_range_nilai">
+                      
                     </select>
                   </div>
-                </div>
+                </div> -->
+                <br>
 
+                  <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
 
               </form>
             </div>
-            <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-              <button type="button" class="btn btn-primary">Submit</button>
-            </div>
+            
           </div>
         </div>
       </div>
-      @endforeach
 
       <div class="x_panel">
         <div class="x_title">
@@ -159,7 +174,7 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table class="datatable table table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
@@ -167,32 +182,40 @@
                           <th style="vertical-align:middle">Nama KD</th>
                           <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
+                          <th style="vertical-align:middle">Nilai Harian 1</th>
+                          <th style="vertical-align:middle">Nilai Harian 2</th>
+                          <th style="vertical-align:middle">Rata-rata Nilai Harian 1 & 2</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
                           <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
+                          <th style="vertical-align:middle">Deskripsi</th>
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
                       @foreach($raportengah as $t)
-                        
+                      
                           <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$t->nama_siswa}}</td>
                             <td>{{$t->nama_kd}}</td>
                             <td>{{$t->detail_kd}}</td>
                             <td>{{$t->nilai_kbm}}</td>
-                            <td>{{$t->nilai_harian}}</td>
+                            <td>{{$t->nilai_harian1}}</td>
+                            <td>
+                              @if($t->nilai_harian2 == null) 
+                              - 
+                              @endif
+                            </td>
+                            <td>{{ ($t->nilai_harian1 + $t->nilai_harian2) /2 }}</td>
                             <td>{{$t->nilai_PTS}}</td>
-                            <!-- sementara buat rata2 nilai harian -->
-                            <td>{{$t->nilai_harian}}</td>
-                            <td>{{$t->range_huruf}}</td>
+                            <td>
+                              @if($t->range_huruf == null) 
+                              - 
+                              @endif
+                            </td>
                             <td>{{$t->keterangan}}</td>
                             <td>
                               <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                              <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
                             </td>
                           </tr>
                         
@@ -212,7 +235,8 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
+          <a role="button" class="btn btn-primary" href="{
+            {url('/bukuphb/create')}}">
             <i class="fa fa-user-plus"></i> Add
           </a>
           </ul>
@@ -229,7 +253,7 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table class="datatable table table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
@@ -237,11 +261,12 @@
                           <th style="vertical-align:middle">Nama KD</th>
                           <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
+                          <th style="vertical-align:middle">Nilai Harian 1</th>
+                          <th style="vertical-align:middle">Nilai Harian 2</th>
+                          <th style="vertical-align:middle">Rata-rata Nilai Harian 1 & 2</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
                           <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
+                          <th style="vertical-align:middle">Deskripsi</th>
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
@@ -253,14 +278,22 @@
                           <td>{{$t1->nama_kd}}</td>
                           <td>{{$t1->detail_kd}}</td>
                           <td>{{$t1->nilai_kbm}}</td>
-                          <td>{{$t1->nilai_harian}}</td>
+                          <td>{{$t1->nilai_harian1}}</td>
+                          <td>
+                            @if($t1->nilai_harian2 == null) 
+                            - 
+                            @endif
+                          </td>
+                          <td>{{ ($t1->nilai_harian1 + $t1->nilai_harian2) /2 }}</td>
                           <td>{{$t1->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t1->range_huruf}}</td>
+                          <td>
+                            @if($t1->range_huruf == null) 
+                            - 
+                            @endif
+                          </td>
                           <td>{{$t1->keterangan}}</td>
                           <td>
                             <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t1->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t1->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
@@ -296,7 +329,7 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table class="datatable table table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
@@ -304,11 +337,12 @@
                           <th style="vertical-align:middle">Nama KD</th>
                           <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
+                          <th style="vertical-align:middle">Nilai Harian 1</th>
+                          <th style="vertical-align:middle">Nilai Harian 2</th>
+                          <th style="vertical-align:middle">Rata-rata Nilai Harian 1 & 2</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
                           <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
+                          <th style="vertical-align:middle">Deskripsi</th>
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
@@ -320,14 +354,22 @@
                           <td>{{$t2->nama_kd}}</td>
                           <td>{{$t2->detail_kd}}</td>
                           <td>{{$t2->nilai_kbm}}</td>
-                          <td>{{$t2->nilai_harian}}</td>
+                          <td>{{$t2->nilai_harian1}}</td>
+                          <td>
+                            @if($t2->nilai_harian2 == null) 
+                            - 
+                            @endif
+                          </td>
+                          <td>{{ ($t2->nilai_harian1 + $t2->nilai_harian2) /2 }}</td>
                           <td>{{$t2->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t2->range_huruf}}</td>
+                          <td>
+                            @if($t2->range_huruf == null) 
+                            - 
+                            @endif
+                          </td>
                           <td>{{$t2->keterangan}}</td>
                           <td>
                             <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t2->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t2->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
@@ -363,7 +405,7 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table class="datatable table table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
@@ -371,11 +413,12 @@
                           <th style="vertical-align:middle">Nama KD</th>
                           <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
+                          <th style="vertical-align:middle">Nilai Harian 1</th>
+                          <th style="vertical-align:middle">Nilai Harian 2</th>
+                          <th style="vertical-align:middle">Rata-rata Nilai Harian 1 & 2</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
                           <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
+                          <th style="vertical-align:middle">Deskripsi</th>
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
@@ -387,14 +430,30 @@
                           <td>{{$t3->nama_kd}}</td>
                           <td>{{$t3->detail_kd}}</td>
                           <td>{{$t3->nilai_kbm}}</td>
-                          <td>{{$t3->nilai_harian}}</td>
-                          <td>{{$t3->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t3->range_huruf}}</td>
+                          <td>{{$t3->NILAI_HARIAN1}}</td>
+                          <td>
+                            @if($t3->NILAI_HARIAN2 == null) 
+                            - 
+                            @else
+                            {{$t3->NILAI_HARIAN2}}
+                            @endif
+                          </td>
+                          <td>{{ ($t3->NILAI_HARIAN1 + $t3->NILAI_HARIAN2) /2 }}</td>
+                          <td>{{$t3->NILAI_PTS}}</td>
+                          <td>
+                            @if( ($t3->NILAI_HARIAN1 + $t3->NILAI_HARIAN2) /2 >= 93 ) 
+                            A
+                            @elseif( ($t3->NILAI_HARIAN1 + $t3->NILAI_HARIAN2) /2 >= 84 )
+                            B
+                            @elseif( ($t3->NILAI_HARIAN1 + $t3->NILAI_HARIAN2) /2 >= 75 )
+                            C
+                            @else( ($t3->NILAI_HARIAN1 + $t3->NILAI_HARIAN2) /2 == null )
+                            - 
+                            @endif
+                          </td>
                           <td>{{$t3->keterangan}}</td>
                           <td>
                             <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t3->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t3->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
@@ -408,698 +467,10 @@
       </div>
     </div>
 
-    <!-- Bahasa Indonesia -->
-    <div class="tab-pane fade " id="pills-bahasaindonesia" role="tabpanel" aria-labelledby="pills-bahasaindonesia-tab">
-      <div class="x_panel">
-        <h3>Tambah Data Rapor Tengah Semester
-          <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
-          </ul>
-        </h3>
-      </div>
-
-      <div class="x_panel">
-        <div class="x_title">
-          <h3>Tabel Rapor Tengah Semester</h3>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
-                    <table id="datatable" class="table table-bordered" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th style="vertical-align:middle">Nomor</th>
-                          <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
-                          <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
-                          <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
-                          <th style="vertical-align:middle">Tools</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($raportengah4 as $t4)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$t4->nama_siswa}}</td>
-                          <td>{{$t4->nama_kd}}</td>
-                          <td>{{$t4->detail_kd}}</td>
-                          <td>{{$t4->nilai_kbm}}</td>
-                          <td>{{$t4->nilai_harian}}</td>
-                          <td>{{$t4->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t4->range_huruf}}</td>
-                          <td>{{$t4->keterangan}}</td>
-                          <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t4->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t4->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                          </td>
-                        </tr>
-                      @endforeach
-                      </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Matematika -->
-    <div class="tab-pane fade " id="pills-matematika" role="tabpanel" aria-labelledby="pills-matematika-tab">
-      <div class="x_panel">
-        <h3>Tambah Data Rapor Tengah Semester
-          <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
-          </ul>
-        </h3>
-      </div>
-
-      <div class="x_panel">
-        <div class="x_title">
-          <h3>Tabel Rapor Tengah Semester</h3>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
-                    <table id="datatable" class="table table-bordered" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th style="vertical-align:middle">Nomor</th>
-                          <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
-                          <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
-                          <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
-                          <th style="vertical-align:middle">Tools</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($raportengah5 as $t5)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$t5->nama_siswa}}</td>
-                          <td>{{$t5->nama_kd}}</td>
-                          <td>{{$t5->detail_kd}}</td>
-                          <td>{{$t5->nilai_kbm}}</td>
-                          <td>{{$t5->nilai_harian}}</td>
-                          <td>{{$t5->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t5->range_huruf}}</td>
-                          <td>{{$t5->keterangan}}</td>
-                          <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t5->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t5->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                          </td>
-                        </tr>
-                      @endforeach
-                      </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- IPA -->
-    <div class="tab-pane fade " id="pills-ipa" role="tabpanel" aria-labelledby="pills-ipa-tab">
-      <div class="x_panel">
-        <h3>Tambah Data Rapor Tengah Semester
-          <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
-          </ul>
-        </h3>
-      </div>
-
-      <div class="x_panel">
-        <div class="x_title">
-          <h3>Tabel Rapor Tengah Semester</h3>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
-                    <table id="datatable" class="table table-bordered" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th style="vertical-align:middle">Nomor</th>
-                          <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
-                          <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
-                          <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
-                          <th style="vertical-align:middle">Tools</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($raportengah6 as $t6)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$t6->nama_siswa}}</td>
-                          <td>{{$t6->nama_kd}}</td>
-                          <td>{{$t6->detail_kd}}</td>
-                          <td>{{$t6->nilai_kbm}}</td>
-                          <td>{{$t6->nilai_harian}}</td>
-                          <td>{{$t6->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t6->range_huruf}}</td>
-                          <td>{{$t6->keterangan}}</td>
-                          <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t6->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t6->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                          </td>
-                        </tr>
-                      @endforeach
-                      </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- IPS -->
-    <div class="tab-pane fade " id="pills-ips" role="tabpanel" aria-labelledby="pills-ips-tab">
-      <div class="x_panel">
-        <h3>Tambah Data Rapor Tengah Semester
-          <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
-          </ul>
-        </h3>
-      </div>
-
-      <div class="x_panel">
-        <div class="x_title">
-          <h3>Tabel Rapor Tengah Semester</h3>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
-                    <table id="datatable" class="table table-bordered" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th style="vertical-align:middle">Nomor</th>
-                          <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
-                          <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
-                          <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
-                          <th style="vertical-align:middle">Tools</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($raportengah7 as $t7)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$t7->nama_siswa}}</td>
-                          <td>{{$t7->nama_kd}}</td>
-                          <td>{{$t7->detail_kd}}</td>
-                          <td>{{$t7->nilai_kbm}}</td>
-                          <td>{{$t7->nilai_harian}}</td>
-                          <td>{{$t7->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t7->range_huruf}}</td>
-                          <td>{{$t7->keterangan}}</td>
-                          <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t7->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t7->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                          </td>
-                        </tr>
-                      @endforeach
-                      </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Senbud Prakarya -->
-    <div class="tab-pane fade " id="pills-senbudprakarya" role="tabpanel" aria-labelledby="pills-senbudprakarya-tab">
-      <div class="x_panel">
-        <h3>Tambah Data Rapor Tengah Semester
-          <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
-          </ul>
-        </h3>
-      </div>
-
-      <div class="x_panel">
-        <div class="x_title">
-          <h3>Tabel Rapor Tengah Semester</h3>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
-                    <table id="datatable" class="table table-bordered" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th style="vertical-align:middle">Nomor</th>
-                          <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
-                          <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
-                          <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
-                          <th style="vertical-align:middle">Tools</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($raportengah8 as $t8)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$t8->nama_siswa}}</td>
-                          <td>{{$t8->nama_kd}}</td>
-                          <td>{{$t8->detail_kd}}</td>
-                          <td>{{$t8->nilai_kbm}}</td>
-                          <td>{{$t8->nilai_harian}}</td>
-                          <td>{{$t8->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t->range_huruf}}</td>
-                          <td>{{$t->keterangan}}</td>
-                          <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t8->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t8->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                          </td>
-                        </tr>
-                      @endforeach
-                      </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Penjasorkes -->
-    <div class="tab-pane fade " id="pills-penjasorkes" role="tabpanel" aria-labelledby="pills-penjasorkes-tab">
-      <div class="x_panel">
-        <h3>Tambah Data Rapor Tengah Semester
-          <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
-          </ul>
-        </h3>
-      </div>
-
-      <div class="x_panel">
-        <div class="x_title">
-          <h3>Tabel Rapor Tengah Semester</h3>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
-                    <table id="datatable" class="table table-bordered" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th style="vertical-align:middle">Nomor</th>
-                          <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
-                          <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
-                          <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
-                          <th style="vertical-align:middle">Tools</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($raportengah9 as $t9)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$t9->nama_siswa}}</td>
-                          <td>{{$t9->nama_kd}}</td>
-                          <td>{{$t9->detail_kd}}</td>
-                          <td>{{$t9->nilai_kbm}}</td>
-                          <td>{{$t9->nilai_harian}}</td>
-                          <td>{{$t9->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t9->range_huruf}}</td>
-                          <td>{{$t9->keterangan}}</td>
-                          <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t9->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t9->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                          </td>
-                        </tr>
-                      @endforeach
-                      </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bahasa Jawa -->
-    <div class="tab-pane fade " id="pills-bahasajawa" role="tabpanel" aria-labelledby="pills-bahasajawa-tab">
-      <div class="x_panel">
-        <h3>Tambah Data Rapor Tengah Semester
-          <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
-          </ul>
-        </h3>
-      </div>
-
-      <div class="x_panel">
-        <div class="x_title">
-          <h3>Tabel Rapor Tengah Semester</h3>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
-                    <table id="datatable" class="table table-bordered" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th style="vertical-align:middle">Nomor</th>
-                          <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
-                          <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
-                          <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
-                          <th style="vertical-align:middle">Tools</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($raportengah10 as $t10)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$t10->nama_siswa}}</td>
-                          <td>{{$t10->nama_kd}}</td>
-                          <td>{{$t10->detail_kd}}</td>
-                          <td>{{$t10->nilai_kbm}}</td>
-                          <td>{{$t10->nilai_harian}}</td>
-                          <td>{{$t10->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t10->range_huruf}}</td>
-                          <td>{{$t10->keterangan}}</td>
-                          <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t10->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t10->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                          </td>
-                        </tr>
-                      @endforeach
-                      </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bahasa Arab -->
-    <div class="tab-pane fade " id="pills-bahasaarab" role="tabpanel" aria-labelledby="pills-bahasaarab-tab">
-      <div class="x_panel">
-        <h3>Tambah Data Rapor Tengah Semester
-          <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
-          </ul>
-        </h3>
-      </div>
-
-      <div class="x_panel">
-        <div class="x_title">
-          <h3>Tabel Rapor Tengah Semester</h3>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
-                    <table id="datatable" class="table table-bordered" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th style="vertical-align:middle">Nomor</th>
-                          <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
-                          <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
-                          <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
-                          <th style="vertical-align:middle">Tools</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($raportengah11 as $t11)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$t11->nama_siswa}}</td>
-                          <td>{{$t11->nama_kd}}</td>
-                          <td>{{$t11->detail_kd}}</td>
-                          <td>{{$t11->nilai_kbm}}</td>
-                          <td>{{$t11->nilai_harian}}</td>
-                          <td>{{$t11->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t11->range_huruf}}</td>
-                          <td>{{$t11->keterangan}}</td>
-                          <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t11->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t11->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                          </td>
-                        </tr>
-                      @endforeach
-                      </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bahasa Inggris -->
-    <div class="tab-pane fade " id="pills-bahasainggris" role="tabpanel" aria-labelledby="pills-bahasainggris-tab">
-      <div class="x_panel">
-        <h3>Tambah Data Rapor Tengah Semester
-          <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
-          </ul>
-        </h3>
-      </div>
-
-      <div class="x_panel">
-        <div class="x_title">
-          <h3>Tabel Rapor Tengah Semester</h3>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
-                    <table id="datatable" class="table table-bordered" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th style="vertical-align:middle">Nomor</th>
-                          <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
-                          <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
-                          <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
-                          <th style="vertical-align:middle">Tools</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($raportengah12 as $t12)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$t12->nama_siswa}}</td>
-                          <td>{{$t12->nama_kd}}</td>
-                          <td>{{$t12->detail_kd}}</td>
-                          <td>{{$t12->nilai_kbm}}</td>
-                          <td>{{$t12->nilai_harian}}</td>
-                          <td>{{$t12->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t12->range_huruf}}</td>
-                          <td>{{$t12->keterangan}}</td>
-                          <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t12->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t12->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                          </td>
-                        </tr>
-                      @endforeach
-                      </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TIK -->
-    <div class="tab-pane fade " id="pills-tik" role="tabpanel" aria-labelledby="pills-tik-tab">
-      <div class="x_panel">
-        <h3>Tambah Data Rapor Tengah Semester
-          <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
-          </ul>
-        </h3>
-      </div>
-
-      <div class="x_panel">
-        <div class="x_title">
-          <h3>Tabel Rapor Tengah Semester</h3>
-          <div class="clearfix"></div>
-        </div>
-        <div class="x_content">
-            <div class="row">
-                <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        <!-- table harus pake class -->
-                    <table id="datatable" class="table table-bordered" style="width:100%">
-                      <thead>
-                        <tr>
-                          <th style="vertical-align:middle">Nomor</th>
-                          <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
-                          <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
-                          <th style="vertical-align:middle">Nilai PTS</th>
-                          <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
-                          <th style="vertical-align:middle">Tools</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      @foreach($raportengah13 as $t13)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$t13->nama_siswa}}</td>
-                          <td>{{$t13->nama_kd}}</td>
-                          <td>{{$t13->detail_kd}}</td>
-                          <td>{{$t13->nilai_kbm}}</td>
-                          <td>{{$t13->nilai_harian}}</td>
-                          <td>{{$t13->nilai_PTS}}</td>
-                          <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t13->range_huruf}}</td>
-                          <td>{{$t13->keterangan}}</td>
-                          <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t13->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t13->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                          </td>
-                        </tr>
-                      @endforeach
-                      </tbody>
-                    </table>
-                    
-                  </div>
-                </div>
-            </div>
-        </div>
-      </div>
-    </div>
+    
 
   </div>
 </div>   
 
 @endsection
 
-@section('script')
-
-<!--Datatables -->
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script>
-$(document).ready(function() {
-
-  var table = $('#datatable').DataTable( {
-      responsive: true,
-      paging: false,
-      searching: false
-  } )
-  .columns.adjust()
-  .responsive.recalc();
-
-});
-</script>
-
-@endsection
