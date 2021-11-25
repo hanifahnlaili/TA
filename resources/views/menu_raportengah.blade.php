@@ -1,5 +1,5 @@
 @section('title')
-    <title>Rapor Tengah Semester</title>
+    Rapor Tengah Semester
 @endsection
 
 @extends('index')
@@ -59,95 +59,98 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addalquran">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputAlquran">
             <i class="fas fa-plus-circle"></i> Add
           </button>
           </ul>
         </h3>
       </div>
 
-      <!-- Modal -->
-      @foreach($raportengah as $b)
-      <div class="modal fade" id="addalquran" tabindex="-1" role="dialog" aria-hidden="true">
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputAlquran" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Tambah Nilai Rapor Tengah Semester</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              <form action="" method="POST">
-                @method('PUT')
-                @csrf
-
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
                 <div class="row">
-                  <div class="col-sm-4">
-                    <label style="font-size: medium;">Pilih Siswa </label>
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
                   </div>
-                  <div class="col md-6">
-                    <select class="form-control" id="">
-                      <option>Nama siswa</option>
-                    </select>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
                   </div>
                 </div>
-                <br>
-
+                <hr style="outline-style: auto;">
                 <div class="row">
-                  <div class="col-sm-4">
-                    <label style="font-size: medium;">Pilih Kompetensi Dasar</label>
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL001')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
                   </div>
-                  <div class="col md-6">
-                    <select class="form-control" id="">
-                      <option>Nama Kompetensi Dasar</option>
-                    </select>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
                   </div>
                 </div>
-                <br>
-
+                <hr style="outline-style: auto;">
                 <div class="row">
-                  <div class="col-sm-4">
-                    <label style="font-size: medium;">Nilai Harian</label>
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL001')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
                   </div>
-                  <div class="col md-6">
-                    <input type="number" class="form-control" placeholder="Nilai Harian">
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
                   </div>
                 </div>
-                <br>
-
-                <div class="row">
-                  <div class="col-sm-4">
-                    <label style="font-size: medium;">Nilai PTS</label>
-                  </div>
-                  <div class="col md-6">
-                    <input type="number" class="form-control" placeholder="Nilai PTS">
-                  </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
                 </div>
-                <br>
-
-                <div class="row">
-                  <div class="col-sm-4">
-                    <label style="font-size: medium;"> Pilih Range Nilai</label>
-                  </div>
-                  <div class="col md-6">
-                    <select class="form-control" id="">
-                      <option>A</option>
-                    </select>
-                  </div>
-                </div>
-
-
-              </form>
-            </div>
-            <div class="modal-footer">
-              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
-              <button type="button" class="btn btn-primary">Submit</button>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
-      @endforeach
 
       <div class="x_panel">
         <div class="x_title">
@@ -157,49 +160,39 @@
         <div class="x_content">
             <div class="row">
                 <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
+                  <div class="card-box table-responsive">                         
                     <table id="datatable" class="table table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
                       @foreach($raportengah as $t)
-                        
-                          <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>{{$t->nama_siswa}}</td>
-                            <td>{{$t->nama_kd}}</td>
-                            <td>{{$t->detail_kd}}</td>
-                            <td>{{$t->nilai_kbm}}</td>
-                            <td>{{$t->nilai_harian}}</td>
-                            <td>{{$t->nilai_PTS}}</td>
-                            <!-- sementara buat rata2 nilai harian -->
-                            <td>{{$t->nilai_harian}}</td>
-                            <td>{{$t->range_huruf}}</td>
-                            <td>{{$t->keterangan}}</td>
-                            <td>
-                              <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                              <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
-                            </td>
-                          </tr>
-                        
+                        <tr>
+                          <td>{{$loop->iteration}}</td>
+                          <td>{{$t->nama_siswa}}</td>
+                          <td>{{$t->nilai_kbm}}</td>
+                          <td>{{$t->nilai_PTS}}</td>
+                          @if($t->nilai_harian2 != null)
+                            <td>{{ floor( ($t->nilai_harian1 + $t->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t->nilai_harian1 }}</td>
+                          @endif
+                          <!-- sementara buat rata2 nilai harian -->
+                          <td>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t->nomor_induk }}/{{ $t->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t->nomor_induk }}/{{ $t->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
+                          </td>
+                        </tr>
                       @endforeach
                       </tbody>
                     </table>
-                    
                   </div>
                 </div>
             </div>
@@ -212,11 +205,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputAqidah">
+              <i class="fas fa-plus-circle"></i> Add
+            </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputAqidah" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL002')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL002')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -234,14 +313,9 @@
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
@@ -250,17 +324,17 @@
                         <tr>
                           <td>{{$loop->iteration}}</td>
                           <td>{{$t1->nama_siswa}}</td>
-                          <td>{{$t1->nama_kd}}</td>
-                          <td>{{$t1->detail_kd}}</td>
                           <td>{{$t1->nilai_kbm}}</td>
-                          <td>{{$t1->nilai_harian}}</td>
                           <td>{{$t1->nilai_PTS}}</td>
+                          @if($t1->nilai_harian2 != null)
+                            <td>{{ floor( ($t1->nilai_harian1 + $t1->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t1->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t1->range_huruf}}</td>
-                          <td>{{$t1->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t1->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t1->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t1->nomor_induk }}/{{ $t1->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t1->nomor_induk }}/{{ $t1->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
@@ -279,11 +353,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+            <button role="button" class="btn btn-primary" data-toggle="modal" data-target="#inputKmd">
+              <i class="fa fa-user-plus"></i> Add
+            </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputKmd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL005')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL005')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -301,33 +461,28 @@
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah2 as $t2)
+                      @foreach($raportengah4 as $t4)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t2->nama_siswa}}</td>
-                          <td>{{$t2->nama_kd}}</td>
-                          <td>{{$t2->detail_kd}}</td>
-                          <td>{{$t2->nilai_kbm}}</td>
-                          <td>{{$t2->nilai_harian}}</td>
-                          <td>{{$t2->nilai_PTS}}</td>
+                          <td>{{$t4->nama_siswa}}</td>
+                          <td>{{$t4->nilai_kbm}}</td>
+                          <td>{{$t4->nilai_PTS}}</td>
+                          @if($t4->nilai_harian2 != null)
+                            <td>{{ floor( ($t4->nilai_harian1 + $t4->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t4->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t2->range_huruf}}</td>
-                          <td>{{$t2->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t2->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t2->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t4->nomor_induk }}/{{ $t4->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t4->nomor_induk }}/{{ $t4->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
@@ -346,11 +501,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputPkn">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputPkn" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL006')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL006')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -361,46 +602,39 @@
         <div class="x_content">
             <div class="row">
                 <div class="col-sm-12">
-                  <div class="card-box table-responsive">
-                                                        
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                  <div class="card-box table-responsive">          
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah3 as $t3)
+                      @foreach($raportengah5 as $t5)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t3->nama_siswa}}</td>
-                          <td>{{$t3->nama_kd}}</td>
-                          <td>{{$t3->detail_kd}}</td>
-                          <td>{{$t3->nilai_kbm}}</td>
-                          <td>{{$t3->nilai_harian}}</td>
-                          <td>{{$t3->nilai_PTS}}</td>
+                          <td>{{$t5->nama_siswa}}</td>
+                          <td>{{$t5->nilai_kbm}}</td>
+                          <td>{{$t5->nilai_PTS}}</td>
+                          @if($t5->nilai_harian2 != null)
+                            <td>{{ floor( ($t5->nilai_harian1 + $t5->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t5->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t3->range_huruf}}</td>
-                          <td>{{$t3->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t3->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t3->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t5->nomor_induk }}/{{ $t5->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t5->nomor_induk }}/{{ $t5->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
-                    
+                    </table>                    
                   </div>
                 </div>
             </div>
@@ -413,11 +647,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputBahasaInd">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputBahasaInd" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL007')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL007')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -430,44 +750,39 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah4 as $t4)
+                      @foreach($raportengah6 as $t6)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t4->nama_siswa}}</td>
-                          <td>{{$t4->nama_kd}}</td>
-                          <td>{{$t4->detail_kd}}</td>
-                          <td>{{$t4->nilai_kbm}}</td>
-                          <td>{{$t4->nilai_harian}}</td>
-                          <td>{{$t4->nilai_PTS}}</td>
+                          <td>{{$t6->nama_siswa}}</td>
+                          <td>{{$t6->nilai_kbm}}</td>
+                          <td>{{$t6->nilai_PTS}}</td>
+                          @if($t6->nilai_harian2 != null)
+                            <td>{{ floor( ($t6->nilai_harian1 + $t6->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t6->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t4->range_huruf}}</td>
-                          <td>{{$t4->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t4->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t4->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t6->nomor_induk }}/{{ $t6->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t6->nomor_induk }}/{{ $t6->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
-                    
+                    </table>                    
+
                   </div>
                 </div>
             </div>
@@ -480,11 +795,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputMtk">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputMtk" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL008')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL008')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -497,43 +898,38 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah5 as $t5)
+                      @foreach($raportengah7 as $t7)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t5->nama_siswa}}</td>
-                          <td>{{$t5->nama_kd}}</td>
-                          <td>{{$t5->detail_kd}}</td>
-                          <td>{{$t5->nilai_kbm}}</td>
-                          <td>{{$t5->nilai_harian}}</td>
-                          <td>{{$t5->nilai_PTS}}</td>
+                          <td>{{$t7->nama_siswa}}</td>
+                          <td>{{$t7->nilai_kbm}}</td>
+                          <td>{{$t7->nilai_PTS}}</td>
+                          @if($t7->nilai_harian2 != null)
+                            <td>{{ floor( ($t7->nilai_harian1 + $t7->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t7->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t5->range_huruf}}</td>
-                          <td>{{$t5->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t5->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t5->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t7->nomor_induk }}/{{ $t7->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t7->nomor_induk }}/{{ $t7->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
+                    </table>                    
                     
                   </div>
                 </div>
@@ -547,11 +943,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputIpa">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputIpa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL009')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL009')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -564,43 +1046,38 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah6 as $t6)
+                      @foreach($raportengah8 as $t8)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t6->nama_siswa}}</td>
-                          <td>{{$t6->nama_kd}}</td>
-                          <td>{{$t6->detail_kd}}</td>
-                          <td>{{$t6->nilai_kbm}}</td>
-                          <td>{{$t6->nilai_harian}}</td>
-                          <td>{{$t6->nilai_PTS}}</td>
+                          <td>{{$t8->nama_siswa}}</td>
+                          <td>{{$t8->nilai_kbm}}</td>
+                          <td>{{$t8->nilai_PTS}}</td>
+                          @if($t8->nilai_harian2 != null)
+                            <td>{{ floor( ($t8->nilai_harian1 + $t8->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t8->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t6->range_huruf}}</td>
-                          <td>{{$t6->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t6->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t6->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t8->nomor_induk }}/{{ $t8->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t8->nomor_induk }}/{{ $t8->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
+                    </table>                    
                     
                   </div>
                 </div>
@@ -614,11 +1091,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputIps">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputIps" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL010')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL010')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -631,43 +1194,38 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah7 as $t7)
+                      @foreach($raportengah9 as $t9)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t7->nama_siswa}}</td>
-                          <td>{{$t7->nama_kd}}</td>
-                          <td>{{$t7->detail_kd}}</td>
-                          <td>{{$t7->nilai_kbm}}</td>
-                          <td>{{$t7->nilai_harian}}</td>
-                          <td>{{$t7->nilai_PTS}}</td>
+                          <td>{{$t9->nama_siswa}}</td>
+                          <td>{{$t9->nilai_kbm}}</td>
+                          <td>{{$t9->nilai_PTS}}</td>
+                          @if($t9->nilai_harian2 != null)
+                            <td>{{ floor( ($t9->nilai_harian1 + $t9->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t9->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t7->range_huruf}}</td>
-                          <td>{{$t7->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t7->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t7->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t9->nomor_induk }}/{{ $t9->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t9->nomor_induk }}/{{ $t9->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
+                    </table>                    
                     
                   </div>
                 </div>
@@ -681,11 +1239,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputSenbud">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputSenbud" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL011')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL011')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -698,43 +1342,38 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah8 as $t8)
+                      @foreach($raportengah10 as $t10)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t8->nama_siswa}}</td>
-                          <td>{{$t8->nama_kd}}</td>
-                          <td>{{$t8->detail_kd}}</td>
-                          <td>{{$t8->nilai_kbm}}</td>
-                          <td>{{$t8->nilai_harian}}</td>
-                          <td>{{$t8->nilai_PTS}}</td>
+                          <td>{{$t10->nama_siswa}}</td>
+                          <td>{{$t10->nilai_kbm}}</td>
+                          <td>{{$t10->nilai_PTS}}</td>
+                          @if($t10->nilai_harian2 != null)
+                            <td>{{ floor( ($t10->nilai_harian1 + $t10->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t10->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t->range_huruf}}</td>
-                          <td>{{$t->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t8->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t8->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t10->nomor_induk }}/{{ $t10->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t10->nomor_induk }}/{{ $t10->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
+                    </table>                    
                     
                   </div>
                 </div>
@@ -748,11 +1387,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputPenjas">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputPenjas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL012')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL012')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -765,43 +1490,38 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah9 as $t9)
+                      @foreach($raportengah11 as $t11)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t9->nama_siswa}}</td>
-                          <td>{{$t9->nama_kd}}</td>
-                          <td>{{$t9->detail_kd}}</td>
-                          <td>{{$t9->nilai_kbm}}</td>
-                          <td>{{$t9->nilai_harian}}</td>
-                          <td>{{$t9->nilai_PTS}}</td>
+                          <td>{{$t11->nama_siswa}}</td>
+                          <td>{{$t11->nilai_kbm}}</td>
+                          <td>{{$t11->nilai_PTS}}</td>
+                          @if($t11->nilai_harian2 != null)
+                            <td>{{ floor( ($t11->nilai_harian1 + $t11->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t11->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t9->range_huruf}}</td>
-                          <td>{{$t9->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t9->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t9->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t11->nomor_induk }}/{{ $t11->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t11->nomor_induk }}/{{ $t11->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
+                    </table>                    
                     
                   </div>
                 </div>
@@ -815,11 +1535,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputJawa">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputJawa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL013')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL013')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -832,43 +1638,38 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah10 as $t10)
+                      @foreach($raportengah12 as $t12)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t10->nama_siswa}}</td>
-                          <td>{{$t10->nama_kd}}</td>
-                          <td>{{$t10->detail_kd}}</td>
-                          <td>{{$t10->nilai_kbm}}</td>
-                          <td>{{$t10->nilai_harian}}</td>
-                          <td>{{$t10->nilai_PTS}}</td>
+                          <td>{{$t12->nama_siswa}}</td>
+                          <td>{{$t12->nilai_kbm}}</td>
+                          <td>{{$t12->nilai_PTS}}</td>
+                          @if($t12->nilai_harian2 != null)
+                            <td>{{ floor( ($t12->nilai_harian1 + $t12->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t12->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t10->range_huruf}}</td>
-                          <td>{{$t10->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t10->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t10->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t12->nomor_induk }}/{{ $t12->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t12->nomor_induk }}/{{ $t12->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
+                    </table>                    
                     
                   </div>
                 </div>
@@ -882,11 +1683,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputArab">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputArab" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL014')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL014')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -899,43 +1786,38 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah11 as $t11)
+                      @foreach($raportengah13 as $t13)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t11->nama_siswa}}</td>
-                          <td>{{$t11->nama_kd}}</td>
-                          <td>{{$t11->detail_kd}}</td>
-                          <td>{{$t11->nilai_kbm}}</td>
-                          <td>{{$t11->nilai_harian}}</td>
-                          <td>{{$t11->nilai_PTS}}</td>
+                          <td>{{$t13->nama_siswa}}</td>
+                          <td>{{$t13->nilai_kbm}}</td>
+                          <td>{{$t13->nilai_PTS}}</td>
+                          @if($t13->nilai_harian2 != null)
+                            <td>{{ floor( ($t13->nilai_harian1 + $t13->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t13->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t11->range_huruf}}</td>
-                          <td>{{$t11->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t11->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t11->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t13->nomor_induk }}/{{ $t13->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t13->nomor_induk }}/{{ $t13->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
+                    </table>                    
                     
                   </div>
                 </div>
@@ -949,11 +1831,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputInggris">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputInggris" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL015')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL015')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -966,43 +1934,38 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah12 as $t12)
+                      @foreach($raportengah14 as $t14)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t12->nama_siswa}}</td>
-                          <td>{{$t12->nama_kd}}</td>
-                          <td>{{$t12->detail_kd}}</td>
-                          <td>{{$t12->nilai_kbm}}</td>
-                          <td>{{$t12->nilai_harian}}</td>
-                          <td>{{$t12->nilai_PTS}}</td>
+                          <td>{{$t14->nama_siswa}}</td>
+                          <td>{{$t14->nilai_kbm}}</td>
+                          <td>{{$t14->nilai_PTS}}</td>
+                          @if($t14->nilai_harian2 != null)
+                            <td>{{ floor( ($t14->nilai_harian1 + $t14->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t14->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t12->range_huruf}}</td>
-                          <td>{{$t12->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t12->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t12->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t14->nomor_induk }}/{{ $t14->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t14->nomor_induk }}/{{ $t14->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
+                    </table>                    
                     
                   </div>
                 </div>
@@ -1016,11 +1979,97 @@
       <div class="x_panel">
         <h3>Tambah Data Rapor Tengah Semester
           <ul class="nav navbar-right panel_toolbox">
-          <a role="button" class="btn btn-primary" href="{{url('/bukuphb/create')}}">
-            <i class="fa fa-user-plus"></i> Add
-          </a>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inputTik">
+            <i class="fas fa-plus-circle"></i> Add
+          </button>
           </ul>
         </h3>
+      </div>
+
+      <!-- Modal Insert-->
+      <div class="modal fade bs-example-modal-lg in" id="inputTik" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel2">Tambah Nilai Rapor Tengah Semester</h4>
+              <button type="button" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="/menu_raportengah/insert" class="form-horizontal form-label-left" method="post">
+              {{ csrf_field() }}
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label>Nama Siswa</label>
+                      <select name="nama" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Siswa --</option>
+                        @foreach($siswa as $s)
+                          <option value="{{ $s->NOMOR_INDUK }}">{{ $s->NAMA_SISWA }}</option>
+                        @endforeach
+                      </select>
+                    </div> 
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Nilai PTS</label>
+                      <input type="number" name="pts" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 1</label>
+                      <select name="kd1" required class="form-control mb-12 mb-12">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL016')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 1</label>
+                      <input type="number" name="nilai1" required class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <hr style="outline-style: auto;">
+                <div class="row">
+                  <div class="col-sm-9">
+                    <div class="form-group">
+                      <label>Kompetensi Dasar 2</label>
+                      <select name="kd2" required class="form-control mb-3 mb-3">
+                        <option value="">-- Pilih Kompetensi Dasar --</option>
+                        @foreach($kd as $k)
+                          @if($k->ID_MATAPELAJARAN == 'MPL016')
+                            <option value="{{ $k->ID_KD }}">{{ $k->NAMA_KD }} - {{ $k->DETAIL_KD }}</option>
+                          @endif
+                        @endforeach
+                      </select>                    
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                      <label>Nilai Harian 2</label>
+                      <input type="number" name="nilai2" class="form-control">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
 
       <div class="x_panel">
@@ -1032,44 +2081,39 @@
             <div class="row">
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
-                                                        <!-- table harus pake class -->
-                    <table id="datatable" class="table table-bordered" style="width:100%">
+
+                    <table id="datatable-responsive" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
                           <th style="vertical-align:middle">Nama Siswa</th>
-                          <th style="vertical-align:middle">Nama KD</th>
-                          <th style="vertical-align:middle">Detail Kompetensi Dasar</th>
                           <th style="vertical-align:middle">KBM</th>
-                          <th style="vertical-align:middle">Nilai Harian</th>
                           <th style="vertical-align:middle">Nilai PTS</th>
                           <th style="vertical-align:middle">Rata - rata</th>
-                          <th style="vertical-align:middle">Capaian</th>
-                          <th style="vertical-align:middle">Deskripsi</th> 
                           <th style="vertical-align:middle">Tools</th>
                         </tr>
                       </thead>
                       <tbody>
-                      @foreach($raportengah13 as $t13)
+                      @foreach($raportengah15 as $t15)
                         <tr>
                           <td>{{$loop->iteration}}</td>
-                          <td>{{$t13->nama_siswa}}</td>
-                          <td>{{$t13->nama_kd}}</td>
-                          <td>{{$t13->detail_kd}}</td>
-                          <td>{{$t13->nilai_kbm}}</td>
-                          <td>{{$t13->nilai_harian}}</td>
-                          <td>{{$t13->nilai_PTS}}</td>
+                          <td>{{$t15->nama_siswa}}</td>
+                          <td>{{$t15->nilai_kbm}}</td>
+                          <td>{{$t15->nilai_PTS}}</td>
+                          @if($t15->nilai_harian2 != null)
+                            <td>{{ floor( ($t15->nilai_harian1 + $t15->nilai_harian2) / 2) }}</td>
+                          @else
+                            <td>{{ $t15->nilai_harian1 }}</td>
+                          @endif
                           <!-- sementara buat rata2 nilai harian -->
-                          <td>{{$t13->range_huruf}}</td>
-                          <td>{{$t13->keterangan}}</td>
                           <td>
-                            <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t13->ID_KOMPONEN) }}"><i class="fa fa-edit"></i></a>
-                            <a role="button" class="btn btn-info tooltip-test" data-toggle="modal" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$t13->ID_KOMPONEN) }}"><i class="fa fa-info-circle"></i></a>
+                            <a role="button" class="btn btn-secondary" title="Edit Siswa" href="/menu_raportengah/edit/{{ $t15->nomor_induk }}/{{ $t15->id_matapelajaran }}"><i class="fa fa-edit"></i></a>
+                            <a class="btn btn-info tooltip-test" title="Detail Siswa" href="/menu_raportengah/detail/{{ $t15->nomor_induk }}/{{ $t15->id_matapelajaran }}"><i class="fa fa-info-circle"></i></a>
                           </td>
                         </tr>
                       @endforeach
                       </tbody>
-                    </table>
+                    </table>                    
                     
                   </div>
                 </div>
@@ -1088,7 +2132,7 @@
 <!--Datatables -->
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-<script>
+<!-- <script>
 $(document).ready(function() {
 
   var table = $('#datatable').DataTable( {
@@ -1100,6 +2144,6 @@ $(document).ready(function() {
   .responsive.recalc();
 
 });
-</script>
+</script> -->
 
 @endsection

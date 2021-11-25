@@ -63,9 +63,17 @@ Route::get('/menu_penilaian',\App\Http\Controllers\PenilaianController::class . 
 
 //rapor tengah semester
 Route::get('/menu_raportengah',\App\Http\Controllers\RaporTengahController::class . '@raportengah');
+Route::post('/menu_raportengah/insert',\App\Http\Controllers\RaporTengahController::class . '@store');
+Route::get('/menu_raportengah/edit/{id}/{id2}',\App\Http\Controllers\RaporTengahController::class . '@edit');
+Route::post('/menu_raportengah/update/{id}/{id2}',\App\Http\Controllers\RaporTengahController::class . '@update');
+Route::get('/menu_raportengah/detail/{id}/{id2}',\App\Http\Controllers\RaporTengahController::class . '@detail');
 
 //rapor akhir semester
 Route::get('/menu_raporakhir',\App\Http\Controllers\RaporAkhirController::class . '@raporakhir');
+Route::post('/menu_raporakhir/insert/ki3/{id}',\App\Http\Controllers\RaporAkhirController::class . '@store_ki3');
+Route::post('/menu_raporakhir/insert/ki4/{id}',\App\Http\Controllers\RaporAkhirController::class . '@store_ki4');
+Route::post('/menu_raporakhir/edit/ki3/{id}',\App\Http\Controllers\RaporAkhirController::class . '@edit_ki3');
+Route::post('/menu_raporakhir/edit/ki4/{id}',\App\Http\Controllers\RaporAkhirController::class . '@edit_ki4');
 
 // });
 
