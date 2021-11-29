@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	  <link rel="icon" href="{{asset('logosdm18.ico')}}" type="image/ico" />
 
-    <title>Gentelella Alela! | </title>
+    <title>Gentelella Alela! | @yield('title')</title>
 
     <!-- Bootstrap -->
     <link href="{{asset('tmp1/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -45,9 +45,8 @@
             <div class="navbar nav_title" style="border: 0;">
               <a href="index" class="site_title"><img src="{{asset('logosdm18.png')}}" style="width:41px; height:50px"> <span style="font-size:large"> Rapor SDM 18 Sby</span></a>
             </div>
-
             <div class="clearfix"></div>
-
+            
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
@@ -67,8 +66,7 @@
               <div class="menu_section">
                 <h3>Rapor Online Dinas</h3>
                 <ul class="nav side-menu">
-                  <li><a target="_blank" href="https://rapor.dispendik.surabaya.go.id/"><i class="fas fa-school"></i>&emsp; Rapor Online Dinas Pendidikan Kota Surabaya</a>
-                  </li>
+                  <li><a target="_blank" href="https://rapor.dispendik.surabaya.go.id/"><i class="fas fa-school"></i>&emsp; Rapor Online Dinas Pendidikan Kota Surabaya</a></li>
                 </ul>
               </div>
               <div class="menu_section">
@@ -187,10 +185,10 @@
         <!-- top navigation -->
         <div class="top_nav">
           <div class="nav_menu">
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-              <nav class="nav navbar-nav">
+            <div class="nav toggle">
+              <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+            </div>
+            <nav class="nav navbar-nav">
               <ul class=" navbar-right">
                 <li class="nav-item dropdown open" style="padding-left: 15px;">
                   <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
@@ -202,15 +200,14 @@
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a> -->
-                  <!-- <a class="dropdown-item" >Help</a> -->
-                  <form action="{{ route('logout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-default"> Log Out &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-sign-out"></i></button>
-                    <!-- <a class="dropdown-item" href="javascript:;"></a> -->
-                  </form>
+                    <!-- <a class="dropdown-item" >Help</a> -->
+                    <form action="{{ route('logout') }}" method="POST">
+                      @csrf
+                      <button type="submit" class="btn btn-default"> Log Out &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<i class="fa fa-sign-out"></i></button>
+                      <!-- <a class="dropdown-item" href="javascript:;"></a> -->
+                    </form>
                   </div>
                 </li>
-
               </ul>
             </nav>
           </div>
@@ -221,9 +218,9 @@
         <div class="right_col" role="main">
           <!-- top tiles -->
           <!-- <div class="" style="display: inline-block;" > -->
-            <div class="tile_count">
-              @yield('konten')
-            </div>
+          <div class="tile_count">
+            @yield('konten')
+          </div>
           <!-- </div> -->
           <!-- /top tiles -->
 
@@ -249,13 +246,11 @@
 
           </div> -->
 
-
-          
         </div>
         <!-- /page content -->
 
         <!-- footer content -->
-        <footer>
+        <footer style="background:#F7F7F7;">
           <div class="pull-right ">
             Copyright © 2021. Rapor <a href="https://www.sdm18sby.com">Sekolah Dasar Muhammadiyah 18 Surabaya</a> by Hanifah Nurul Laili
           </div>
