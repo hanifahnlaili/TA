@@ -150,12 +150,8 @@
                   </li>
                   <li><a href="{!! url('/menu_raportengah'); !!}"><i class="fas fa-file-invoice"></i>&emsp; Rapor Tengah Semester</a>
                   </li>
-                  <!-- <li><a href="{!! url('/menu_raportengah'); !!}"><i class="fas fa-print"></i>&emsp; Cetak Nilai Rapor Tengah Semester</a>
-                  </li> -->
                   <li><a href="{!! url('/menu_raporakhir') !!}"><i class="fas fa-file-invoice"></i>&emsp; Rapor Akhir Semester</a>
                   </li>
-                  <!-- <li><a href="{!! url('/menu_raportengah'); !!}"><i class="fas fa-print"></i>&emsp; Cetak Nilai Rapor Akhir Semester</a>
-                  </li> -->
                   @endif        
                 </ul>
               </div>
@@ -310,7 +306,7 @@
     <script>
     $(document).ready(function() {
 
-        var table = $('.datatable').DataTable( {
+        var table = $('#view').DataTable( {
             responsive: true,
             "order": [ 0, 'desc' ],
         } )

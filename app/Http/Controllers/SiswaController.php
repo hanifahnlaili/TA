@@ -72,12 +72,7 @@ class SiswaController extends Controller
                 'nama_ibu' => $request->input('nama_ibu'),
                 'alamat_ortu' => $request->input('alamat_ortu'),
                 'pekerjaan_ayah' => $request->input('pekerjaan_ayah'),
-                'pekerjaan_ibu' => $request->input('pekerjaan_ibu'),
-                'telepon_ayah' => $request->input('telepon_ayah'),
-                'telepon_ibu' => $request->input('telepon_ibu'),
-                'nama_wali' => $request->input('nama_wali'),
-                'pekerjaan_wali' => $request->input('pekerjaan_wali'),
-                'alamat_wali' => $request->input('alamat_wali'),
+                'pekerjaan_ibu' => $request->input('pekerjaan_ibu')
             ));
             $wali_murid_selected = DB::table('wali_murid')->where('nama_ayah', $request->input('nama_ayah'))->where('nama_ibu', $request->input('nama_ibu'))->first();
         }
@@ -100,16 +95,9 @@ class SiswaController extends Controller
             'nama_siswa' => $request->input('nama_siswa'),
             'nisn_siswa' => $request->input('nisn_siswa'),
             'telepon' => $request->input('no_telp_siswa'),
-            'alamat' => $request->input('alamat_siswa'),
-            'jenis_kelamin' => $request->input('jenis_kelamin'),
-            'tempat_tanggal_lahir' => $request->input('tempat_tanggal_lahir'),
-            'agama' => $request->input('agama'),
-            'anak_ke' => $request->input('anak_ke'),
-            'status_dalam_keluarga' => $request->input('status_dalam_keluarga'),
-            'diterima_dikelas' => $request->input('diterima_dikelas'),
-            'tanggal_diterima_dikelas' => $request->input('tanggal_diterima_dikelas'),
+            'alamat' => $request->input('alamat_siswa')
         ));
-        return redirect('/menu_siswa3sunflo')->with('alert_sukses', 'Data Siswa Berhasil Disimpan.');
+        return redirect('/menu_siswa3sunflo');
     }
 
     /**

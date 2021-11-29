@@ -308,7 +308,7 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table class="datatable table table-bordered" style="width:100%">
+                    <table id="datatable" class="table table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>
@@ -456,7 +456,7 @@
                 <div class="col-sm-12">
                   <div class="card-box table-responsive">
                                                         
-                    <table class="datatable table table-bordered" style="width:100%">
+                    <table id="datatable" class="table table-bordered" style="width:100%">
                       <thead>
                         <tr>
                           <th style="vertical-align:middle">Nomor</th>

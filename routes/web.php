@@ -50,7 +50,7 @@ Route::get('/menu_userpengguna',\App\Http\Controllers\UserController::class . '@
 
 //kompetensi dasar
 Route::get('/menu_kdkls3',\App\Http\Controllers\KompetensiDasarController::class . '@index');
-Route::post('/menu_kdkls3/store',\App\Http\Controllers\KompetensiDasarController::class . '@store');
+// Route::get('/kompetensidasar/cetakpdf',\App\Http\Controllers\KompetensiDasarController::class . '@cetakpdf');
 
 //penilaian individu siswa
 Route::get('/menu_penilaian',\App\Http\Controllers\PenilaianController::class . '@penilaian');

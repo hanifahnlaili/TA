@@ -27,15 +27,8 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Tutus',
                 'email' => 'tutus@gmail.com',
                 'password' => bcrypt('tutus'),
-            ),
-            1 =>
-            array(
-                'id_user' => 'USR002',
-                'NBM_PEGAWAI' => 'PEG05',
-                'tipe_user' => '2',
-                'name' => 'Desy',
-                'email' => 'desy@gmail.com',
-                'password' => bcrypt('desy'),
+                'updated_at' => '2021-07-23 02:05:37',
+                'created_at' => '2021-07-23 02:05:37',
             ),
         ));
         

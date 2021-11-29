@@ -9,10 +9,6 @@ use Illuminate\Http\Request;
 
 class RaporTengahController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -183,14 +179,6 @@ class RaporTengahController extends Controller
             ->where('mata_pelajaran.id_matapelajaran','=','MPL013')
             ->orderBy('komponen_nilai_tengah.ID_KOMPONEN', 'ASC')
             ->get();
-        $siswa = DB::table('siswa')->select('nomor_induk','nama_siswa')->get();
-        $kd = DB::table('kompetensi_dasar')->select('id_kd','detail_kd')->get();
-        $mapel = DB::table('mata_pelajaran')->select('id_matapelajaran','nama_matapelajaran')->get();
-        $tapel = DB::table('tahun_pelajaran')->select('id_tahunpelajaran','tahunpelajaran')->get();
-        $detail_siswa = DB::table('detail_siswa')->select('*')->get();
-        $kelas = DB::table('kelas')->select('*')->get();
-        $range_nilai = DB::table('range_nilai')->select('id_range_nilai','range_huruf')->get();
-        $matapel = DB::table('mata_pelajaran')->get('id_matapelajaran');
 
             $raportengah13 = DB::table('komponen_nilai_tengah')
             ->select('komponen_nilai_tengah.*','komponen_nilai_tengah.id_komponen','komponen_nilai_tengah.id_kd','siswa.nama_siswa','siswa.nomor_induk','kompetensi_dasar.nama_kd','kompetensi_dasar.detail_kd','mata_pelajaran.id_matapelajaran','mata_pelajaran.nilai_kbm','komponen_nilai_tengah.nilai_harian1','komponen_nilai_tengah.nilai_harian2','komponen_nilai_tengah.nilai_PTS','range_nilai.range_huruf','range_nilai.keterangan')

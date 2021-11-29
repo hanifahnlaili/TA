@@ -55,55 +55,6 @@
                             </div>
                         </div>
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Jenis Kelamin <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="jenis_kelamin" required="required" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Tempat Tanggal Lahir <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="tempat_tanggal_lahir" required="required" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Agama <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="agama" required="required" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Anak Ke <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="anak_ke" required="required" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Status dalam keluarga <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="status_dalam_keluarga" required="required" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Diterima Dikelas <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="diterima_dikelas" required="required" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Tanggal Diterima Dikelas <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="date" name="tanggal_diterima_dikelas" required="required" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Ayah <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
@@ -115,13 +66,6 @@
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                                 <input type="text" name="pekerjaan_ayah" required="required" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Telepon Ayah <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="number" name="telepon_ayah" required="required" class="form-control">
                             </div>
                         </div>
                         <div class="item form-group">
@@ -139,38 +83,10 @@
                             </div>
                         </div>
                         <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Telepon Ibu <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="number" name="telepon_ibu" required="required" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
                             <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Alamat Orang Tua <span class="required">*</span>
                             </label>
                             <div class="col-md-6 col-sm-6 ">
                                 <input type="text" name="alamat_ortu" required="required" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Nama Wali <span class=""></span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="nama_wali" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Pekerjaan Wali <span class=""></span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="pekerjaan_wali" class="form-control">
-                            </div>
-                        </div>
-                        <div class="item form-group">
-                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Alamat Wali <span class=""></span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 ">
-                                <input type="text" name="alamat_wali" class="form-control">
                             </div>
                         </div>
                         <div class="item form-group">

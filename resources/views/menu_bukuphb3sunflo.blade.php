@@ -119,7 +119,7 @@
                   <table id="datatable" class="table table-bordered" style="width:100%">
                     <thead>
                       <tr>
-                        <th style="vertical-align:middle">Nomor</th>
+                        <th style="vertical-align:middle">ID Nilai Buku Penghubung</th>
                         <th style="vertical-align:middle">Nama Siswa</th>
                         <th style="vertical-align:middle">Nilai Guru Spiritual</th>
                         <th style="vertical-align:middle">Nilai Orang Tua Spiritual</th>
@@ -134,14 +134,14 @@
                     <tbody>
                     @foreach($buku_penghubung as $b)
                       <tr>
-                        <td>{{$loop->iteration}}</td>
+                        <td>{{$b->ID_NBP}}</td>
                         <td>{{$b->nama_siswa}}</td>
                         <td>{{$b->GURU_SPIRITUAL}}</td>
                         <td>{{$b->ORTU_SPIRITUAL}}</td>
-                        <td> {{($b->GURU_SPIRITUAL + $b->ORTU_SPIRITUAL)/2}} </td>
+                        <td>{{$avgspiritual}}</td>
                         <td>{{$b->GURU_SOSIAL}}</td>
                         <td>{{$b->ORTU_SOSIAL}}</td>
-                        <td> {{($b->GURU_SOSIAL + $b->ORTU_SOSIAL)/2}} </td>
+                        <td>{{$avgsosial}}</td>
                         <td>{{$b->DESKRIPSI}}</td>
                         <td>
                           <a role="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Edit Siswa" href="{{ url('/siswa/edit/'.$b->ID_NBP) }}"><i class="fa fa-edit"></i></a>
